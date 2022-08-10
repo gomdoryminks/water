@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta property="og:title" content="모바일 현장지원">
+        <meta property="og:url" content="">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="img/logo-favicon.ico">
+        <meta property="og:site_name" content="모바일 현장지원">
+        <meta property="og:description" content="모바일 현장지원">
+		<title>모바일 현장지원</title>
+		<meta name="description" content="모바일 현장지원">
+		<meta name="author" content="minks">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<meta name="format-detection" content="telephone=no, address=no, email=no">
+        <link rel="shortcut icon" href="img/logo-favicon.ico">
+		<link rel="apple-touch-icon" href="img/logo-favicon.ico">
+		
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+        <link href="css/font.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-datepicker.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet">
+        <link href="css/yearpicker.css" type="text/css" rel="stylesheet">
+        <link href="css/swiper.min.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-pagination.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-grid.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/main.css" type="text/css" rel="stylesheet">        
+        
+		<!--[if lt IE 9]>
+		<script src="js/jquery-1.11.1.min.js" defer></script>
+		<script src="js/html5shiv.js" defer></script>
+		<![endif]-->
+		
+		<!--[if gte IE 9]>
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<![endif]-->
+		
+		<!--[if !IE]>--> 
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<!--<![endif]-->
+		
+		<script src="js/jquery-migrate-1.4.1.min.js" defer></script>
+        <script src="js/jquery-ui.js" defer></script>
+        <script src="js/jquery.ui.touch-punch.min.js" defer></script>
+        <script src="js/jquery-ui-timepicker-addon.js" defer></script>
+        <script src="js/datepicker-ko.js" defer></script>
+        <script src="js/yearpicker.js" defer></script>
+		<script src="js/swiper.min.js" defer></script>
+        <script src="js/chart.js" defer></script>
+        <script src="js/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+        <script src="js/xlsx.full.min.js" defer></script>
+        <script src="js/tui-pagination.js" defer></script>
+        <script src="js/tui-grid.js" defer></script>
+        <script src="js/main.js" defer></script>
+	</head>
+
+	<body>
+        <div class="m-wrap">
+            <!-- preloader -->
+            <div class="preloader">
+                <div class="spinner">
+                    <span class="spinner-rotate"></span>
+                </div>
+            </div>
+            
+            <!-- header -->
+            <header class="header">
+                <h1 class="not-view">header</h1>
+                
+                <div class="header-logo-area">
+                    <a href="index.html" class="header-logo-img"><img src="img/logo.png" alt="로고"></a>
+                    <span class="header-logo-txt">현장지원시스템</span>
+                </div>
+                
+                <div class="header-icon-area">
+                    <div class="header-icon-weather">
+                        <!-- icon-weather01 : 날씨에 따른 클래스명 -->
+                        <div class="header-weather-img icon-weather01"></div>
+                        <!-- v-temperature : 현재 기온 -->
+                        <div class="header-weather-txt"><span id="v-temperature">6.2</span>℃</div>
+                    </div>
+                    <div class="header-icon-user">
+                        <div class="header-user-btn">
+                            <!-- v-notice-cnt : 알림메시지 개수 -->
+                            <span class="header-user-cnt" id="v-notice-cnt">0</span>
+                        </div>
+                        <ul class="header-user-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                            </li>
+                            <li>
+                                <a href="login.html">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header-icon-menu">
+                        <div class="header-menu-btn"></div>
+                    </div>
+                </div>
+            </header>
+            <!-- //header -->
+            
+            <!-- nav -->
+            <nav class="nav">
+                <h1 class="not-view">nav</h1>
+                
+                <div class="nav-tit">
+                    <ul class="nav-tit-list">
+                        <li>
+                            <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                        </li>
+                        <li>
+                            <a href="login.html">로그아웃</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="nav-tit-btn" onclick="closeNavMenu(this);">
+                        <span><img src="img/icon-close.png" alt="메뉴닫기"></span>
+                    </button>
+                </div>
+                
+                <ul class="nav-menu-list">
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='map.html';">
+                            <div class="menu-list-img"><img src="img/main-menu01.png" alt="관망도조회"></div>
+                            <div class="menu-list-txt">관망도조회</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='block-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu02.png" alt="블록관망감시"></div>
+                            <div class="menu-list-txt">블록관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='prefie-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu03.png" alt="가압장관망감시"></div>
+                            <div class="menu-list-txt">가압장관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu04.png" alt="배수지관망감시"></div>
+                            <div class="menu-list-txt">배수지관망감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watres-list01.html">부평정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list02.html">남동정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list03.html">공촌정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list04.html">수산정수장</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu05.png" alt="수질감시"></div>
+                            <div class="menu-list-txt">수질감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watqua-block-list01.html">블록수질감시</a>
+                                </li>
+                                <li>
+                                    <a href="watqua-end-list01.html">관말수질감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu06.png" alt="관망관리"></div>
+                            <div class="menu-list-txt">관망관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="was-list01.html">야간최소유량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list02.html">유수율 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list03.html">총괄수량수지 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list04.html">누수량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list05.html">수압 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list06.html">수계전환</a>
+                                </li>
+                                <li>
+                                    <a href="was-list07.html">이상감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu07.png" alt="계통도"></div>
+                            <div class="menu-list-txt">계통도</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="disdia-list01.html">부평수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list02.html">남동수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list03.html">공촌수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list04.html">수산수계 계통도</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu08.png" alt="정보관리"></div>
+                            <div class="menu-list-txt">정보관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="information-list01.html">유지보수</a>
+                                </li>
+                                <li>
+                                    <a href="information-list02.html">자료실</a>
+                                </li>
+                                <li>
+                                    <a href="information-list03.html">사용자 관리</a>
+                                </li>
+                                <li>
+                                    <a href="information-list04.html">권한정보</a>
+                                </li>
+                                <li>
+                                    <a href="information-list05.html">화면접속 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list06.html">로그인로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list07.html">작업로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list08.html">계측기 현황</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list09.html">편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list10.html">사업소편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list11.html">데이터백업 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list12.html">지도출력데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list13.html">통계 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu-pc-item">
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu10.png" alt="통계현황"></div>
+                            <div class="menu-list-txt">통계현황</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="stats-list01.html">관로통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list02.html">공공측량통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list03.html">시설물통계</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='notice-list.html';">
+                            <div class="menu-list-img"><img src="img/main-menu09.png" alt="공지사항"></div>
+                            <div class="menu-list-txt">공지사항</div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- //nav -->
+            
+            <!-- content -->
+            <!-- c-search-wrap : 좌측에 검색영역이 있는 페이지 내용 -->
+            <section class="c-wrap c-search-wrap">
+                <div class="c-search-aside-mask"></div>
+                <div class="c-search-aside-btn"></div>
+                
+                <!-- aside -->
+                <aside class="aside">
+                    <h1 class="not-view">aside</h1>
+                    
+                    <!-- aside-list-area : 검색할 블록 선택 -->
+                    <!-- aside-single-area : 블록을 1개만 선택해야 하는 경우 추가, aside-multiple-area : 블록을 여러개 선택해도 되는 경우 추가 -->
+                    <div class="aside-list-area aside-multiple-area">
+                        <ul class="aside-list">
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem100">중부수도사업소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem100" name="" value="중부수도사업소">
+                                        <label for="asideItem100"></label>
+                                    </div>
+                                </div>
+                                <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                <ul class="aside-list aside-last-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem00">101</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem00" name="" value="101">
+                                                <label for="asideItem00"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem01">102</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem01" name="" value="102">
+                                                <label for="asideItem01"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem02">103</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem02" name="" value="103">
+                                                <label for="asideItem02"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem03">104</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem03" name="" value="104">
+                                                <label for="asideItem03"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem04">105</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem04" name="" value="105">
+                                                <label for="asideItem04"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem05">106</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem05" name="" value="106">
+                                                <label for="asideItem05"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem06">107</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem06" name="" value="107">
+                                                <label for="asideItem06"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem07">108</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem07" name="" value="108">
+                                                <label for="asideItem07"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem08">109</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem08" name="" value="109">
+                                                <label for="asideItem08"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem09">110</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem09" name="" value="110">
+                                                <label for="asideItem09"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem101">남동부수도사업소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem101" name="" value="남동부수도사업소">
+                                        <label for="asideItem101"></label>
+                                    </div>
+                                </div>
+                                <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                <ul class="aside-list aside-last-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem10">401-1</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem10" name="" value="401-1">
+                                                <label for="asideItem10"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem11">401-2</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem11" name="" value="401-2">
+                                                <label for="asideItem11"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem12">402-1</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem12" name="" value="402-1">
+                                                <label for="asideItem12"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem13">402-2</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem13" name="" value="402-2">
+                                                <label for="asideItem13"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem14">403</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem14" name="" value="403">
+                                                <label for="asideItem14"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem15">404</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem15" name="" value="404">
+                                                <label for="asideItem15"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem16">405</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem16" name="" value="405">
+                                                <label for="asideItem16"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem17">406</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem17" name="" value="406">
+                                                <label for="asideItem17"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem18">406-2</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem18" name="" value="406-2">
+                                                <label for="asideItem18"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem19">407</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem19" name="" value="407">
+                                                <label for="asideItem19"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem102">북부수도사업소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem102" name="" value="북부수도사업소">
+                                        <label for="asideItem102"></label>
+                                    </div>
+                                </div>
+                                <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                <ul class="aside-list aside-last-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem20">601</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem20" name="" value="601">
+                                                <label for="asideItem20"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem21">602</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem21" name="" value="602">
+                                                <label for="asideItem21"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem22">603</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem22" name="" value="603">
+                                                <label for="asideItem22"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem23">604</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem23" name="" value="604">
+                                                <label for="asideItem23"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem24">605</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem24" name="" value="605">
+                                                <label for="asideItem24"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem25">606</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem25" name="" value="606">
+                                                <label for="asideItem25"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem26">607</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem26" name="" value="607">
+                                                <label for="asideItem26"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem27">608</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem27" name="" value="608">
+                                                <label for="asideItem27"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem28">609</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem28" name="" value="609">
+                                                <label for="asideItem28"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem29">610</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem29" name="" value="610">
+                                                <label for="asideItem29"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem103">서부수도사업소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem103" name="" value="서부수도사업소">
+                                        <label for="asideItem103"></label>
+                                    </div>
+                                </div>
+                                <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                <ul class="aside-list aside-last-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem30">653</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem30" name="" value="653">
+                                                <label for="asideItem30"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem31">802</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem31" name="" value="802">
+                                                <label for="asideItem31"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem32">806</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem32" name="" value="806">
+                                                <label for="asideItem32"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem33">808</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem33" name="" value="808">
+                                                <label for="asideItem33"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem34">809</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem34" name="" value="809">
+                                                <label for="asideItem34"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem35">810</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem35" name="" value="810">
+                                                <label for="asideItem35"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem36">811</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem36" name="" value="811">
+                                                <label for="asideItem36"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem37">812</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem37" name="" value="812">
+                                                <label for="asideItem37"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem38">813</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem38" name="" value="813">
+                                                <label for="asideItem38"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem39">814</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem39" name="" value="814">
+                                                <label for="asideItem39"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem104">강화수도사업소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem104" name="" value="강화수도사업소">
+                                        <label for="asideItem104"></label>
+                                    </div>
+                                </div>
+                                <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                <ul class="aside-list aside-last-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem40">901</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem40" name="" value="901">
+                                                <label for="asideItem40"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem41">902</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem41" name="" value="902">
+                                                <label for="asideItem41"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem42">902-1(조산리)</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem42" name="" value="902-1(조산리)">
+                                                <label for="asideItem42"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem43">902-2(능내리)</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem43" name="" value="902-2(능내리)">
+                                                <label for="asideItem43"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem44">903</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem44" name="" value="903">
+                                                <label for="asideItem44"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem45">904</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem45" name="" value="904">
+                                                <label for="asideItem45"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem46">904-1(석모리)</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem46" name="" value="904-1(석모리)">
+                                                <label for="asideItem46"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem47">904-2(석포리)</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem47" name="" value="904-2(석포리)">
+                                                <label for="asideItem47"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem48">905</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem48" name="" value="905">
+                                                <label for="asideItem48"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem49">906</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem49" name="" value="906">
+                                                <label for="asideItem49"></label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="aside-list-tit">
+                                    <div class="aside-list-name"><label for="asideItem105">수도시설관리소</label></div>
+                                    <div class="aside-list-check">
+                                        <input type="checkbox" id="asideItem105" name="" value="수도시설관리소">
+                                        <label for="asideItem105"></label>
+                                    </div>
+                                </div>
+                                <ul class="aside-list">
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem106">가좌배수지</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem106" name="" value="가좌배수지">
+                                                <label for="asideItem106"></label>
+                                            </div>
+                                        </div>
+                                        <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                        <ul class="aside-list aside-last-list">
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem50">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem50" name="" value="631">
+                                                        <label for="asideItem50"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem51">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem51" name="" value="653">
+                                                        <label for="asideItem51"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem52">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem52" name="" value="835-1">
+                                                        <label for="asideItem52"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem53">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem53" name="" value="838">
+                                                        <label for="asideItem53"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem54">839</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem54" name="" value="839">
+                                                        <label for="asideItem54"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem55">840</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem55" name="" value="840">
+                                                        <label for="asideItem55"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem56">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem56" name="" value="631">
+                                                        <label for="asideItem56"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem57">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem57" name="" value="653">
+                                                        <label for="asideItem57"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem58">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem58" name="" value="835-1">
+                                                        <label for="asideItem58"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem59">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem59" name="" value="838">
+                                                        <label for="asideItem59"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem107">강화배수지</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem107" name="" value="강화배수지">
+                                                <label for="asideItem107"></label>
+                                            </div>
+                                        </div>
+                                        <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                        <ul class="aside-list aside-last-list">
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem60">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem60" name="" value="631">
+                                                        <label for="asideItem60"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem61">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem61" name="" value="653">
+                                                        <label for="asideItem61"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem62">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem62" name="" value="835-1">
+                                                        <label for="asideItem62"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem63">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem63" name="" value="838">
+                                                        <label for="asideItem63"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem64">839</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem64" name="" value="839">
+                                                        <label for="asideItem64"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem65">840</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem65" name="" value="840">
+                                                        <label for="asideItem65"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem66">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem66" name="" value="631">
+                                                        <label for="asideItem66"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem67">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem67" name="" value="653">
+                                                        <label for="asideItem67"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem68">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem68" name="" value="835-1">
+                                                        <label for="asideItem68"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem69">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem69" name="" value="838">
+                                                        <label for="asideItem69"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem108">검단배수지</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem108" name="" value="검단배수지">
+                                                <label for="asideItem108"></label>
+                                            </div>
+                                        </div>
+                                        <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                        <ul class="aside-list aside-last-list">
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem70">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem70" name="" value="631">
+                                                        <label for="asideItem70"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem71">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem71" name="" value="653">
+                                                        <label for="asideItem71"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem72">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem72" name="" value="835-1">
+                                                        <label for="asideItem72"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem73">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem73" name="" value="838">
+                                                        <label for="asideItem73"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem74">839</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem74" name="" value="839">
+                                                        <label for="asideItem74"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem75">840</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem75" name="" value="840">
+                                                        <label for="asideItem75"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem76">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem76" name="" value="631">
+                                                        <label for="asideItem76"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem77">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem77" name="" value="653">
+                                                        <label for="asideItem77"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem78">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem78" name="" value="835-1">
+                                                        <label for="asideItem78"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem79">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem79" name="" value="838">
+                                                        <label for="asideItem79"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem109">검단신도시배수지</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem109" name="" value="검단신도시배수지">
+                                                <label for="asideItem109"></label>
+                                            </div>
+                                        </div>
+                                        <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                        <ul class="aside-list aside-last-list">
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem80">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem80" name="" value="631">
+                                                        <label for="asideItem80"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem81">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem81" name="" value="653">
+                                                        <label for="asideItem81"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem82">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem82" name="" value="835-1">
+                                                        <label for="asideItem82"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem83">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem83" name="" value="838">
+                                                        <label for="asideItem83"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem84">839</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem84" name="" value="839">
+                                                        <label for="asideItem84"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem85">840</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem85" name="" value="840">
+                                                        <label for="asideItem85"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem86">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem86" name="" value="631">
+                                                        <label for="asideItem86"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem87">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem87" name="" value="653">
+                                                        <label for="asideItem87"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem88">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem88" name="" value="835-1">
+                                                        <label for="asideItem88"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem89">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem89" name="" value="838">
+                                                        <label for="asideItem89"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <div class="aside-list-tit">
+                                            <div class="aside-list-name"><label for="asideItem110">공항신도시배수지</label></div>
+                                            <div class="aside-list-check">
+                                                <input type="checkbox" id="asideItem110" name="" value="공항신도시배수지">
+                                                <label for="asideItem110"></label>
+                                            </div>
+                                        </div>
+                                        <!-- aside-last-list : 마지막 뎁스일 경우 추가 -->
+                                        <ul class="aside-list aside-last-list">
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem90">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem90" name="" value="631">
+                                                        <label for="asideItem90"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem91">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem91" name="" value="653">
+                                                        <label for="asideItem91"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem92">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem92" name="" value="835-1">
+                                                        <label for="asideItem92"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem93">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem93" name="" value="838">
+                                                        <label for="asideItem93"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem94">839</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem94" name="" value="839">
+                                                        <label for="asideItem94"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem95">840</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem95" name="" value="840">
+                                                        <label for="asideItem95"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem96">631</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem96" name="" value="631">
+                                                        <label for="asideItem96"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem97">653</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem97" name="" value="653">
+                                                        <label for="asideItem97"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem98">835-1</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem98" name="" value="835-1">
+                                                        <label for="asideItem98"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="aside-list-tit">
+                                                    <div class="aside-list-name"><label for="asideItem99">838</label></div>
+                                                    <div class="aside-list-check">
+                                                        <input type="checkbox" id="asideItem99" name="" value="838">
+                                                        <label for="asideItem99"></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- aside-date-area : 검색할 조건 선택 -->
+                    <div class="aside-search-area">
+                        <div class="aside-search-tit">데이터 조회</div>
+                        
+                        <div class="aside-search-item">
+                            <div class="aside-search-item-tit">날짜선택</div>
+                            <div class="aside-search-item-con">
+                                <input type="text" id="startDate" name="" class="c-year-input" readonly placeholder="시작년선택" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- aside-btn-area : 검색 버튼 -->
+                    <div class="aside-btn-area">
+                        <button type="button" class="c-btn01 aside-btn" onclick="setWatfloGridSearch();">
+                            <span>조회</span>
+                        </button>
+                    </div>
+                </aside>
+                
+                <div class="c-search-area">
+                    <!-- c-topbar-area : 페이지 상단바 -->
+                    <ul class="c-topbar-area">
+                        <li>관망관리</li>
+                        <li>유수율 분석</li>
+                    </ul>
+
+                    <div class="c-content-area">
+                        <section class="c-list-area">
+                            <div class="c-table-tit">
+                                <div class="table-tit-left">
+                                    <div class="table-tit-name">블록단위 평균 유수율(%)</div>
+                                </div>
+                            </div>
+                            
+                            <!-- dynamic-grid-area : 동적 그리드 그리기 -->
+                            <div class="dynamic-grid-area" id="watflo-block-grid-area"></div>
+                            
+                            <div class="c-table-tit">
+                                <div class="table-tit-left">
+                                    <div class="table-tit-name">월단위 유수율(%)</div>
+                                    <button type="button" class="c-btn01" onclick="getDynamicGridExcel('watfloMonthGrid');">
+                                        <span>엑셀</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- dynamic-grid-area : 동적 그리드 그리기 -->
+                            <div class="dynamic-grid-area" id="watflo-month-grid-area"></div>
+                        </section>
+                    </div>
+                </div>
+            </section>
+            <!-- //content -->
+            
+            <!-- snsBtn -->
+            <div class="sns-btn-area">
+                <button type="button" class="sns-btn" onclick="">
+                    <span><img src="img/icon-kakao.png" alt="카카오톡"></span>
+                </button>
+            </div>
+            <!-- //snsBtn -->
+            
+            <!-- layer -->
+            <div class="l-wrap">
+                <!-- alert창 -->
+                <div class="layer-wrap" id="alert-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- confirm창 -->
+                <div class="layer-wrap" id="confirm-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn half-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                            <button type="button" class="layer-btn half-btn close-btn" onclick="closeLayer(this);">
+                                <span>취소</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 헤더 내정보창 -->
+                <div class="layer-wrap" id="user-modify-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">내정보</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area">
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">아이디</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="admin1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">사용자명</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="관리자1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">권한그룹</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="일반사용자" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">전화번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="tel" id="" name="" value="010-1234-1234" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">이메일</div>
+                                    <div class="layer-input-con">
+                                        <input type="email" id="" name="" value="admin1@test.com" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호 확인</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">인증서</div>
+                                    <div class="layer-input-con">
+                                        <button type="button" class="c-btn01 half-btn" onclick="">
+                                            <span>인증서 등록</span>
+                                        </button>
+                                        <button type="button" class="c-btn02 half-btn" onclick="">
+                                            <span>인증서 삭제</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>수정</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 트렌드 분석화면창 -->
+                <div class="layer-wrap layer-all-wrap" id="trand-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">트렌드 분석화면</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeTrandLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="trand-area">
+                                <!-- v-trand-data : 실시간 트렌드분석 데이터 -->
+                                <div class="c-table-area" id="v-trand-data">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>항목명</th>
+                                                <th>항목설명</th>
+                                                <th>현재값</th>
+                                                <th>최대값</th>
+                                                <th>최소값</th>
+                                                <th>단위</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- trand-chart-area : 트렌드분석 차트 그리기 -->
+                                <div class="trand-chart-area"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //layer -->
+        </div>
+	</body>
+</html>

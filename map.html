@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta property="og:title" content="모바일 현장지원">
+        <meta property="og:url" content="">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="img/logo-favicon.ico">
+        <meta property="og:site_name" content="모바일 현장지원">
+        <meta property="og:description" content="모바일 현장지원">
+		<title>모바일 현장지원</title>
+		<meta name="description" content="모바일 현장지원">
+		<meta name="author" content="minks">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<meta name="format-detection" content="telephone=no, address=no, email=no">
+        <link rel="shortcut icon" href="img/logo-favicon.ico">
+		<link rel="apple-touch-icon" href="img/logo-favicon.ico">
+		
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+        <link href="css/font.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-datepicker.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet">
+        <link href="css/spectrum.css" type="text/css" rel="stylesheet">
+        <link href="css/yearpicker.css" type="text/css" rel="stylesheet">
+        <link href="css/swiper.min.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-pagination.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-grid.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/main.css" type="text/css" rel="stylesheet">        
+        
+		<!--[if lt IE 9]>
+		<script src="js/jquery-1.11.1.min.js" defer></script>
+		<script src="js/html5shiv.js" defer></script>
+		<![endif]-->
+		
+		<!--[if gte IE 9]>
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<![endif]-->
+		
+		<!--[if !IE]>--> 
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<!--<![endif]-->
+		
+		<script src="js/jquery-migrate-1.4.1.min.js" defer></script>
+        <script src="js/jquery-ui.js" defer></script>
+        <script src="js/jquery.ui.touch-punch.min.js" defer></script>
+        <script src="js/jquery-ui-timepicker-addon.js" defer></script>
+        <script src="js/datepicker-ko.js" defer></script>
+        <script src="js/spectrum.js" defer></script>
+        <script src="js/yearpicker.js" defer></script>
+		<script src="js/swiper.min.js" defer></script>
+        <script src="js/chart.js" defer></script>
+        <script src="js/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+        <script src="js/xlsx.full.min.js" defer></script>
+        <script src="js/tui-pagination.js" defer></script>
+        <script src="js/tui-grid.js" defer></script>
+        <script src="js/main.js" defer></script>
+	</head>
+
+	<body>
+        <div class="m-wrap">
+            <!-- preloader -->
+            <div class="preloader">
+                <div class="spinner">
+                    <span class="spinner-rotate"></span>
+                </div>
+            </div>
+            
+            <!-- header -->
+            <header class="header">
+                <h1 class="not-view">header</h1>
+                
+                <div class="header-logo-area">
+                    <a href="index.html" class="header-logo-img"><img src="img/logo.png" alt="로고"></a>
+                    <span class="header-logo-txt">현장지원시스템</span>
+                </div>
+                
+                <div class="header-icon-area">
+                    <div class="header-icon-weather">
+                        <!-- icon-weather01 : 날씨에 따른 클래스명 -->
+                        <div class="header-weather-img icon-weather01"></div>
+                        <!-- v-temperature : 현재 기온 -->
+                        <div class="header-weather-txt"><span id="v-temperature">6.2</span>℃</div>
+                    </div>
+                    <div class="header-icon-user">
+                        <div class="header-user-btn">
+                            <!-- v-notice-cnt : 알림메시지 개수 -->
+                            <span class="header-user-cnt" id="v-notice-cnt">0</span>
+                        </div>
+                        <ul class="header-user-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                            </li>
+                            <li>
+                                <a href="login.html">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header-icon-menu">
+                        <div class="header-menu-btn"></div>
+                    </div>
+                </div>
+            </header>
+            <!-- //header -->
+            
+            <!-- nav -->
+            <nav class="nav">
+                <h1 class="not-view">nav</h1>
+                
+                <div class="nav-tit">
+                    <ul class="nav-tit-list">
+                        <li>
+                            <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                        </li>
+                        <li>
+                            <a href="login.html">로그아웃</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="nav-tit-btn" onclick="closeNavMenu(this);">
+                        <span><img src="img/icon-close.png" alt="메뉴닫기"></span>
+                    </button>
+                </div>
+                
+                <ul class="nav-menu-list">
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='map.html';">
+                            <div class="menu-list-img"><img src="img/main-menu01.png" alt="관망도조회"></div>
+                            <div class="menu-list-txt">관망도조회</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='block-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu02.png" alt="블록관망감시"></div>
+                            <div class="menu-list-txt">블록관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='prefie-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu03.png" alt="가압장관망감시"></div>
+                            <div class="menu-list-txt">가압장관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu04.png" alt="배수지관망감시"></div>
+                            <div class="menu-list-txt">배수지관망감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watres-list01.html">부평정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list02.html">남동정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list03.html">공촌정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list04.html">수산정수장</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu05.png" alt="수질감시"></div>
+                            <div class="menu-list-txt">수질감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watqua-block-list01.html">블록수질감시</a>
+                                </li>
+                                <li>
+                                    <a href="watqua-end-list01.html">관말수질감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu06.png" alt="관망관리"></div>
+                            <div class="menu-list-txt">관망관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="was-list01.html">야간최소유량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list02.html">유수율 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list03.html">총괄수량수지 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list04.html">누수량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list05.html">수압 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list06.html">수계전환</a>
+                                </li>
+                                <li>
+                                    <a href="was-list07.html">이상감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu07.png" alt="계통도"></div>
+                            <div class="menu-list-txt">계통도</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="disdia-list01.html">부평수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list02.html">남동수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list03.html">공촌수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list04.html">수산수계 계통도</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu08.png" alt="정보관리"></div>
+                            <div class="menu-list-txt">정보관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="information-list01.html">유지보수</a>
+                                </li>
+                                <li>
+                                    <a href="information-list02.html">자료실</a>
+                                </li>
+                                <li>
+                                    <a href="information-list03.html">사용자 관리</a>
+                                </li>
+                                <li>
+                                    <a href="information-list04.html">권한정보</a>
+                                </li>
+                                <li>
+                                    <a href="information-list05.html">화면접속 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list06.html">로그인로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list07.html">작업로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list08.html">계측기 현황</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list09.html">편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list10.html">사업소편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list11.html">데이터백업 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list12.html">지도출력데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list13.html">통계 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu-pc-item">
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu10.png" alt="통계현황"></div>
+                            <div class="menu-list-txt">통계현황</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="stats-list01.html">관로통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list02.html">공공측량통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list03.html">시설물통계</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='notice-list.html';">
+                            <div class="menu-list-img"><img src="img/main-menu09.png" alt="공지사항"></div>
+                            <div class="menu-list-txt">공지사항</div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- //nav -->
+            
+            <!-- content -->
+            <!-- c-map : 관망도조회 내용 -->
+            <section class="c-wrap c-map">
+                <!-- c-topbar-area : 페이지 상단바 -->
+                <ul class="c-topbar-area">
+                    <li>관망도조회</li>
+                </ul>
+                
+                <div class="c-content-area">
+                    <section class="c-map-area was-map-area"></section>
+                    
+                    <section class="map-horizontal-icon-area">
+                        <ul class="map-icon-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon01.png" alt="홈"></div>
+                                    <div class="map-icon-txt">홈</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon02.png" alt="도구"></div>
+                                    <div class="map-icon-txt">도구</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon03.png" alt="확대"></div>
+                                    <div class="map-icon-txt">확대</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon04.png" alt="축소"></div>
+                                    <div class="map-icon-txt">축소</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon05.png" alt="이전"></div>
+                                    <div class="map-icon-txt">이전</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon06.png" alt="다음"></div>
+                                    <div class="map-icon-txt">다음</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon07.png" alt="선택"></div>
+                                    <div class="map-icon-txt">선택</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon08.png" alt="선택해제"></div>
+                                    <div class="map-icon-txt">선택해제</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon09.png" alt="레이블"></div>
+                                    <div class="map-icon-txt">레이블</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon10.png" alt="초기화"></div>
+                                    <div class="map-icon-txt">초기화</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon11.png" alt="나침반"></div>
+                                    <div class="map-icon-txt">나침반</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon12.png" alt="전체화면"></div>
+                                    <div class="map-icon-txt">전체화면</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon13.png" alt="화면전환"></div>
+                                    <div class="map-icon-txt">화면전환</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section class="map-center-icon-area">
+                        <ul class="map-icon-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon14.png" alt="내위치"></div>
+                                    <div class="map-icon-txt">내위치</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section class="map-vertical-icon-area">
+                        <ul class="map-icon-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'search');">
+                                    <div class="map-icon-img"><img src="img/map-icon15.png" alt="검색"></div>
+                                    <div class="map-icon-txt">검색</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'layer');">
+                                    <div class="map-icon-img"><img src="img/map-icon16.png" alt="레이어"></div>
+                                    <div class="map-icon-txt">레이어</div>
+                                </a>
+                            </li>
+                            <li class="map-pc-icon">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="인쇄보기"></div>
+                                    <div class="map-icon-txt">인쇄보기</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'baseMap');">
+                                    <div class="map-icon-img"><img src="img/map-icon17.png" alt="베이스맵"></div>
+                                    <div class="map-icon-txt">베이스맵</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'distanceMeasurement');">
+                                    <div class="map-icon-img"><img src="img/map-icon18.png" alt="거리측정"></div>
+                                    <div class="map-icon-txt">거리측정</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'longitudinalSection');">
+                                    <div class="map-icon-img"><img src="img/map-icon19.png" alt="종단면도"></div>
+                                    <div class="map-icon-txt">종단면도</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterWay');">
+                                    <div class="map-icon-img"><img src="img/map-icon20.png" alt="물방향"></div>
+                                    <div class="map-icon-txt">물방향</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'crossSection');">
+                                    <div class="map-icon-img"><img src="img/map-icon21.png" alt="횡단면도"></div>
+                                    <div class="map-icon-txt">횡단면도</div>
+                                </a>
+                            </li>
+                            <li class="m-map-hidden">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon22.png" alt="로드뷰"></div>
+                                    <div class="map-icon-txt">로드뷰</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
+                                    <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
+                                    <div class="map-icon-txt">관세척</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
+                                    <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
+                                    <div class="map-icon-txt">밸브정보</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
+                                    <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
+                                    <div class="map-icon-txt">공사정보</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
+                                    <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
+                                    <div class="map-icon-txt">현장정보</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
+                                    <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
+                                    <div class="map-icon-txt">민원신고</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
+                                    <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
+                                    <div class="map-icon-txt">수용가</div>
+                                </a>
+                            </li>
+                            <li class="map-mobile-icon">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
+                                    <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
+                                    <div class="map-icon-txt">RFID</div>
+                                </a>
+                            </li>
+                            <li class="map-pc-icon">
+                                <a href="javascript:void(0);" onclick="">
+                                    <div class="map-icon-img"><img src="img/map-icon32.png" alt="인덱스맵"></div>
+                                    <div class="map-icon-txt">인덱스맵</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section class="map-vertical-icon-area map-pc-icon">
+                        <ul class="map-icon-list">
+                            <li>
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
+                                    <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
+                                    <div class="map-icon-txt">관세척</div>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
+                                    <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
+                                    <div class="map-icon-txt">밸브정보</div>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
+                                    <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
+                                    <div class="map-icon-txt">공사정보</div>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
+                                    <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
+                                    <div class="map-icon-txt">현장정보</div>
+                                </a>
+                            </li>
+                            <li>
+                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
+                                    <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
+                                    <div class="map-icon-txt">민원신고</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
+                                    <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
+                                    <div class="map-icon-txt">수용가</div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
+                                    <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
+                                    <div class="map-icon-txt">RFID</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section class="map-bottom-bar-area">
+                        <div class="map-bottom-bar-item">
+                            <div class="bottom-bar-area">
+                                <div class="bottom-bar-tit">작업대상 <br class="br-375">레이어</div>
+                                <!-- v-object-layer : 작업대상 레이어 -->
+                                <div class="bottom-bar-con"><span id="v-object-layer">유량계_전체</span></div>
+                            </div>
+                            <div class="bottom-bar-area">
+                                <div class="bottom-bar-tit">선택한 <br class="br-375">도구</div>
+                                <!-- v-selected-tool : 선택한 도구 -->
+                                <div class="bottom-bar-con"><span id="v-selected-tool">기본</span></div>
+                            </div>
+                            <div class="bottom-bar-area">
+                                <div class="bottom-bar-tit">축척</div>
+                                <div class="bottom-bar-con">
+                                    <select id="" name="">
+                                        <option value="1:2500">1:2,500</option>
+                                        <option value="1:5000">1:5,000</option>
+                                        <option value="1:7500">1:7,500</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="map-bottom-bar-item">
+                            <div class="bottom-bar-area">
+                                <div class="bottom-bar-tit">위치</div>
+                                <div class="bottom-bar-con">
+                                    <select id="" name="">
+                                        <option value="동이름">동이름</option>
+                                        <option value="블록명">블록명</option>
+                                    </select>
+                                    <select id="" name="">
+                                        <option value="">선택</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="bottom-bar-area">
+                                <div class="bottom-bar-tit">좌표</div>
+                                <div class="bottom-bar-con">
+                                    <input type="text" id="" name="" value="126.000000">
+                                    <input type="text" id="" name="" value="37.000000">
+                                    <select id="" name="" class="m-map-hidden">
+                                        <option value="경위도">경위도</option>
+                                        <option value="TM">TM</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <section class="map-layer-area">
+                        <!-- map-layer00 : 아이콘창 -->
+                        <div class="map-layer-wrap map-layer00">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer01 : 대장리스트창 -->
+                        <div class="map-layer-wrap map-layer01">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer02 : 대장상세창 -->
+                        <div class="map-layer-wrap map-layer02">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer03 : 정보리스트창 -->
+                        <div class="map-layer-wrap map-layer03">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer04 : 정보상세창 -->
+                        <div class="map-layer-wrap map-layer04">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer05 : 레이어설정창 -->
+                        <div class="map-layer-wrap map-layer05">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit">레이어 설정</div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer06 : 단수분석창 -->
+                        <div class="map-layer-wrap map-layer06">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit">단수분석</div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer07 : 수용가정보창 -->
+                        <div class="map-layer-wrap map-layer07">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit">수용가 정보</div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <!-- //content -->
+            
+            <!-- snsBtn -->
+            <div class="sns-btn-area">
+                <button type="button" class="sns-btn" onclick="">
+                    <span><img src="img/icon-kakao.png" alt="카카오톡"></span>
+                </button>
+            </div>
+            <!-- //snsBtn -->
+            
+            <!-- layer -->
+            <div class="l-wrap">
+                <!-- alert창 -->
+                <div class="layer-wrap" id="alert-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- confirm창 -->
+                <div class="layer-wrap" id="confirm-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn half-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                            <button type="button" class="layer-btn half-btn close-btn" onclick="closeLayer(this);">
+                                <span>취소</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 헤더 내정보창 -->
+                <div class="layer-wrap" id="user-modify-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">내정보</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area">
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">아이디</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="admin1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">사용자명</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="관리자1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">권한그룹</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="일반사용자" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">전화번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="tel" id="" name="" value="010-1234-1234" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">이메일</div>
+                                    <div class="layer-input-con">
+                                        <input type="email" id="" name="" value="admin1@test.com" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호 확인</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">인증서</div>
+                                    <div class="layer-input-con">
+                                        <button type="button" class="c-btn01 half-btn" onclick="">
+                                            <span>인증서 등록</span>
+                                        </button>
+                                        <button type="button" class="c-btn02 half-btn" onclick="">
+                                            <span>인증서 삭제</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>수정</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 트렌드 분석화면창 -->
+                <div class="layer-wrap layer-all-wrap" id="trand-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">트렌드 분석화면</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeTrandLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="trand-area">
+                                <!-- v-trand-data : 실시간 트렌드분석 데이터 -->
+                                <div class="c-table-area" id="v-trand-data">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>항목명</th>
+                                                <th>항목설명</th>
+                                                <th>현재값</th>
+                                                <th>최대값</th>
+                                                <th>최소값</th>
+                                                <th>단위</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- trand-chart-area : 트렌드분석 차트 그리기 -->
+                                <div class="trand-chart-area"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- SQL식 작성기창 -->
+                <div class="layer-wrap layer-map-wrap" id="sql-search-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">SQL식 작성기</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area sql-search-area">
+                                <div class="sql-search-topbtn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>절 추가</span>
+                                    </button>
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>절 집합 추가</span>
+                                    </button>
+                                </div>
+                                <ul class="sql-search-list">
+                                    <li>
+                                        <div class="sql-search-item">
+                                            <select id="" name="">
+                                                <option value="시설물">시설물</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="다음과 같음">다음과 같음</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="배기변">배기변</option>
+                                            </select>
+                                            <button type="button" class="c-btn01" onclick="">
+                                                <span><img class="svg" src="img/close.svg" alt="절 삭제"></span>
+                                            </button>
+                                        </div>
+                                        <div class="sql-search-item">
+                                            <select id="" name="">
+                                                <option value="시설물">시설물</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="다음과 같음">다음과 같음</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="배기변">배기변</option>
+                                            </select>
+                                            <button type="button" class="c-btn01" onclick="">
+                                                <span><img class="svg" src="img/close.svg" alt="절 삭제"></span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="sql-search-item">
+                                            <select id="" name="">
+                                                <option value="시설물">시설물</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="다음과 같음">다음과 같음</option>
+                                            </select>
+                                            <select id="" name="">
+                                                <option value="배기변">배기변</option>
+                                            </select>
+                                            <button type="button" class="c-btn01" onclick="">
+                                                <span><img class="svg" src="img/close.svg" alt="절 삭제"></span>
+                                            </button>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>확인</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 관망도관리 레이어 등록정보창 -->
+                <div class="layer-wrap layer-map-wrap" id="map-layerinfo-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">레이어 등록정보</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area">
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">가시범위</div>
+                                    <div class="layer-input-con">
+                                        <!-- c-range-area : input range 슬라이드 -->
+                                        <div class="c-range-area">
+                                            <div class="c-range-slider">
+                                                <!-- 진짜 슬라이더 (단방향일 경우 'c-range-right' 클래스의 태그를 노출하고 양방향일 경우 'c-range-right'와 'c-range-left' 클래스의 태그를 노출함) -->
+                                                <input type="range" id="" name="" class="c-range-left" min="0" max="10" step="1" value="0">
+                                                <input type="range" id="" name="" class="c-range-right" min="0" max="10" step="1" value="10">
+                                                
+                                                <!-- 커스텀 슬라이더 (단방향일 경우 'thumb right' 클래스의 태그를 노출하고 양방향일 경우 'thumb right'와 'thumb left' 클래스의 태그를 노출함) -->
+                                                <div class="c-custom-slider">
+                                                    <div class="track"></div>
+                                                    <div class="range"></div>
+                                                    <div class="thumb left"></div>
+                                                    <div class="thumb right"></div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 슬라이더 텍스트 ('left-txt' 클래스 태그 안에 내용이 없을 경우 input range의 min값이 'right-txt' 클래스 태그 안에 내용이 없을 경우 input range의 max값이 적용됨) -->
+                                            <div class="c-range-txt">
+                                                <div class="left-txt">
+                                                    <select id="" name="">
+                                                        <option value="도로">도로</option>
+                                                    </select>
+                                                </div>
+                                                <div class="right-txt">
+                                                    <select id="" name="">
+                                                        <option value="방">방</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">투명도</div>
+                                    <div class="layer-input-con">
+                                        <!-- c-range-area : input range 슬라이드 -->
+                                        <div class="c-range-area">
+                                            <div class="c-range-slider">
+                                                <!-- 진짜 슬라이더 (단방향일 경우 'c-range-right' 클래스의 태그를 노출하고 양방향일 경우 'c-range-right'와 'c-range-left' 클래스의 태그를 노출함) -->
+                                                <input type="range" id="" name="" class="c-range-right" min="0" max="100" step="1" value="0">
+                                                
+                                                <!-- 커스텀 슬라이더 (단방향일 경우 'thumb right' 클래스의 태그를 노출하고 양방향일 경우 'thumb right'와 'thumb left' 클래스의 태그를 노출함) -->
+                                                <div class="c-custom-slider">
+                                                    <div class="track"></div>
+                                                    <div class="range"></div>
+                                                    <div class="thumb right">
+                                                        <!-- thumb-txt : 값을 노출하고 싶을 경우에만 추가 -->
+                                                        <span class="thumb-txt"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- 슬라이드 텍스트 ('left-txt' 클래스 태그 안에 내용이 없을 경우 input range의 min값이 'right-txt' 클래스 태그 안에 내용이 없을 경우 input range의 max값이 적용됨) -->
+                                            <div class="c-range-txt">
+                                                <div class="left-txt"></div>
+                                                <div class="right-txt"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">화살표</div>
+                                    <div class="layer-input-con">
+                                        <input type="checkbox" id="mliCheck00" name="">
+                                        <label for="mliCheck00">표시</label>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">심볼</div>
+                                    <div class="layer-input-con">
+                                        <!-- data-symbol-weight : 심볼 선굵기, data-symbol-color : 심볼 선색상, data-symbol-style : 심볼 선스타일 -->
+                                        <div class="map-layerinfo-symbol" id="" data-symbol-weight="1" data-symbol-color="#007bff" data-symbol-style="solid" onclick="openMapLayersymbolLayer(this);"></div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">레이블</div>
+                                    <div class="layer-input-con">
+                                        <input type="checkbox" id="mliCheck01" name="">
+                                        <label for="mliCheck01">표시</label>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">레이블 필드</div>
+                                    <div class="layer-input-con">
+                                        <select id="" name="">
+                                            <option value="">선택</option>
+                                            <option value="관라벨">관라벨</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">레이블 심볼</div>
+                                    <div class="layer-input-con">
+                                        <div class="layer-input-highlight" id="">가Aa1</div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">동적 레이블</div>
+                                    <div class="layer-input-con">
+                                        <select id="" name="">
+                                            <option value="">선택</option>
+                                            <option value="관라벨">관라벨</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01 half-btn" onclick="">
+                                        <span>확인</span>
+                                    </button>
+                                    <button type="button" class="c-btn02 half-btn" onclick="">
+                                        <span>초기설정으로 복원</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 관망도관리 레이어 심볼선택창 -->
+                <div class="layer-wrap layer-map-wrap" id="map-layersymbol-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">레이어 심볼선택</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area">
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">현재심볼</div>
+                                    <div class="layer-input-con">
+                                        <div class="map-layerinfo-symbol" id=""></div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <ul class="map-layersymbol-list">
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #007bff; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #6f42c1; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #dc3545; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #fd7e14; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 4px; border-top-color: #007bff; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 4px; border-top-color: #6f42c1; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 4px; border-top-color: #dc3545; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 4px; border-top-color: #fd7e14; border-top-style: solid;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #007bff; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #6f42c1; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #dc3545; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #fd7e14; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 3px; border-top-color: #007bff; border-top-style: dashed;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 3px; border-top-color: #6f42c1; border-top-style: dashed;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 3px; border-top-color: #dc3545; border-top-style: dashed;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 3px; border-top-color: #fd7e14; border-top-style: dashed;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 5px; border-top-color: #007bff; border-top-style: double;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 5px; border-top-color: #6f42c1; border-top-style: double;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 5px; border-top-color: #dc3545; border-top-style: double;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 5px; border-top-color: #fd7e14; border-top-style: double;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #007bff; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #6f42c1; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #dc3545; border-top-style: dotted;"></div>
+                                        </li>
+                                        <li>
+                                            <div class="map-layersymbol-symbol" id="" style="border-top-width: 2px; border-top-color: #fd7e14; border-top-style: dotted;"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">선굵기</div>
+                                    <div class="layer-input-con">
+                                        <!-- c-number-area : input number 입력창 -->
+                                        <div class="c-number-area">
+                                            <input type="text" id="" name="" class="c-number-input" min="1" max="10" step="1" value="1">
+                                            <button type="button" class="c-number-btn c-number-plus-btn" onclick="setNumberInput(this,'+');"></button>
+                                            <button type="button" class="c-number-btn c-number-minus-btn" onclick="setNumberInput(this,'-');"></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">선색상</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" class="c-color-input" autocomplete="off">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">선스타일</div>
+                                    <div class="layer-input-con">
+                                        <!-- c-select-area : 커스텀 셀렉트박스 -->
+                                        <div class="c-select-area">
+                                            <div class="c-select-input"></div>
+                                            <ul class="c-select-list">
+                                                <li>
+                                                    <input type="radio" id="mlsSelectSolid" name="mlsSelect">
+                                                    <label for="mlsSelectSolid"><span class="border solid"></span></label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="mlsSelectDotted" name="mlsSelect">
+                                                    <label for="mlsSelectDotted"><span class="border dotted"></span></label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="mlsSelectDashed" name="mlsSelect">
+                                                    <label for="mlsSelectDashed"><span class="border dashed"></span></label>
+                                                </li>
+                                                <li>
+                                                    <input type="radio" id="mlsSelectDouble" name="mlsSelect">
+                                                    <label for="mlsSelectDouble"><span class="border double"></span></label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>확인</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //layer -->
+        </div>
+	</body>
+</html>

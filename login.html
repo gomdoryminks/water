@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta property="og:title" content="모바일 현장지원">
+        <meta property="og:url" content="">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="img/logo-favicon.ico">
+        <meta property="og:site_name" content="모바일 현장지원">
+        <meta property="og:description" content="모바일 현장지원">
+		<title>모바일 현장지원</title>
+		<meta name="description" content="모바일 현장지원">
+		<meta name="author" content="minks">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<meta name="format-detection" content="telephone=no, address=no, email=no">
+        <link rel="shortcut icon" href="img/logo-favicon.ico">
+		<link rel="apple-touch-icon" href="img/logo-favicon.ico">
+		
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+        <link href="css/font.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-datepicker.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet">
+        <link href="css/yearpicker.css" type="text/css" rel="stylesheet">
+        <link href="css/swiper.min.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-pagination.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-grid.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/main.css" type="text/css" rel="stylesheet">        
+        
+		<!--[if lt IE 9]>
+		<script src="js/jquery-1.11.1.min.js" defer></script>
+		<script src="js/html5shiv.js" defer></script>
+		<![endif]-->
+		
+		<!--[if gte IE 9]>
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<![endif]-->
+		
+		<!--[if !IE]>--> 
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<!--<![endif]-->
+		
+		<script src="js/jquery-migrate-1.4.1.min.js" defer></script>
+        <script src="js/jquery-ui.js" defer></script>
+        <script src="js/jquery.ui.touch-punch.min.js" defer></script>
+        <script src="js/jquery-ui-timepicker-addon.js" defer></script>
+        <script src="js/datepicker-ko.js" defer></script>
+        <script src="js/yearpicker.js" defer></script>
+		<script src="js/swiper.min.js" defer></script>
+        <script src="js/chart.js" defer></script>
+        <script src="js/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+        <script src="js/xlsx.full.min.js" defer></script>
+        <script src="js/tui-pagination.js" defer></script>
+        <script src="js/tui-grid.js" defer></script>
+        <script src="js/main.js" defer></script>
+	</head>
+
+	<body>
+        <div class="m-wrap">
+            <!-- preloader -->
+            <div class="preloader">
+                <div class="spinner">
+                    <span class="spinner-rotate"></span>
+                </div>
+            </div>
+            
+            <!-- content -->
+            <!-- c-login : 로그인 내용 -->
+            <section class="c-wrap c-login">
+                <div class="login-area">
+                    <div class="login-img-area">
+                        <!--<a href="index.html" class="login-img"><img src="img/login-logo.png" alt="로고"></a>-->
+                        <div class="login-logo-area">
+                            <a href="index.html" class="login-logo-img"><img src="img/logo.png" alt="로고"></a>
+                            <span class="login-logo-txt">현장지원시스템</span>
+                        </div>
+                    </div>
+
+                    <div class="login-box-area">
+                        <div class="login-box">
+                            <div class="login-box-tit">로그인</div>
+                            <div class="login-box-con">
+                                <div class="login-box-form">
+                                    <form id="" name="" action="" method="">
+                                        <div class="login-form-id">
+                                            <input type="text" id="" name="" class="login-form-input" placeholder="아이디">
+                                        </div>
+                                        <div class="login-form-pw">
+                                            <input type="password" id="" name="" class="login-form-input" placeholder="비밀번호">
+                                        </div>
+                                        <button type="button" class="c-btn01" onclick="location.href='index.html';">
+                                            <span><b>인증서</b> 로그인</span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="login-box-btn">
+                                    <button type="button" class="c-btn02" onclick="">
+                                        <span><b>간편인증</b> 로그인</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="login-explain">
+                            본 사이트는 크롬(Google Chrome)에 최적화되어 있습니다.<br>
+                            <span>(특히, 서비스 중단 예정인 익스플로러는 오류가 발생할 수 있습니다.)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- //content -->
+            
+            <!-- layer -->
+            <div class="l-wrap">
+                <!-- alert창 -->
+                <div class="layer-wrap" id="alert-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- confirm창 -->
+                <div class="layer-wrap" id="confirm-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn half-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                            <button type="button" class="layer-btn half-btn close-btn" onclick="closeLayer(this);">
+                                <span>취소</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //layer -->
+        </div>
+	</body>
+</html>

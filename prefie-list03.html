@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta property="og:title" content="모바일 현장지원">
+        <meta property="og:url" content="">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="img/logo-favicon.ico">
+        <meta property="og:site_name" content="모바일 현장지원">
+        <meta property="og:description" content="모바일 현장지원">
+		<title>모바일 현장지원</title>
+		<meta name="description" content="모바일 현장지원">
+		<meta name="author" content="minks">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover">
+		<meta name="format-detection" content="telephone=no, address=no, email=no">
+        <link rel="shortcut icon" href="img/logo-favicon.ico">
+		<link rel="apple-touch-icon" href="img/logo-favicon.ico">
+		
+		<link href="css/reset.css" type="text/css" rel="stylesheet">
+        <link href="css/font.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-datepicker.css" type="text/css" rel="stylesheet">
+        <link href="css/jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet">
+        <link href="css/yearpicker.css" type="text/css" rel="stylesheet">
+        <link href="css/swiper.min.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-pagination.css" type="text/css" rel="stylesheet">
+        <link href="css/tui-grid.css" type="text/css" rel="stylesheet">
+        <link href="css/common.css" type="text/css" rel="stylesheet">
+        <link href="css/main.css" type="text/css" rel="stylesheet">        
+        
+		<!--[if lt IE 9]>
+		<script src="js/jquery-1.11.1.min.js" defer></script>
+		<script src="js/html5shiv.js" defer></script>
+		<![endif]-->
+		
+		<!--[if gte IE 9]>
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<![endif]-->
+		
+		<!--[if !IE]>--> 
+		<script src="js/jquery-3.4.1.min.js" defer></script>
+		<!--<![endif]-->
+		
+		<script src="js/jquery-migrate-1.4.1.min.js" defer></script>
+        <script src="js/jquery-ui.js" defer></script>
+        <script src="js/jquery.ui.touch-punch.min.js" defer></script>
+        <script src="js/jquery-ui-timepicker-addon.js" defer></script>
+        <script src="js/datepicker-ko.js" defer></script>
+        <script src="js/yearpicker.js" defer></script>
+		<script src="js/swiper.min.js" defer></script>
+        <script src="js/chart.js" defer></script>
+        <script src="js/chartjs-adapter-date-fns.bundle.min.js" defer></script>
+        <script src="js/xlsx.full.min.js" defer></script>
+        <script src="js/tui-pagination.js" defer></script>
+        <script src="js/tui-grid.js" defer></script>
+        <script src="js/main.js" defer></script>
+	</head>
+
+	<body>
+        <div class="m-wrap">
+            <!-- preloader -->
+            <div class="preloader">
+                <div class="spinner">
+                    <span class="spinner-rotate"></span>
+                </div>
+            </div>
+            
+            <!-- header -->
+            <header class="header">
+                <h1 class="not-view">header</h1>
+                
+                <div class="header-logo-area">
+                    <a href="index.html" class="header-logo-img"><img src="img/logo.png" alt="로고"></a>
+                    <span class="header-logo-txt">현장지원시스템</span>
+                </div>
+                
+                <div class="header-icon-area">
+                    <div class="header-icon-weather">
+                        <!-- icon-weather01 : 날씨에 따른 클래스명 -->
+                        <div class="header-weather-img icon-weather01"></div>
+                        <!-- v-temperature : 현재 기온 -->
+                        <div class="header-weather-txt"><span id="v-temperature">6.2</span>℃</div>
+                    </div>
+                    <div class="header-icon-user">
+                        <div class="header-user-btn">
+                            <!-- v-notice-cnt : 알림메시지 개수 -->
+                            <span class="header-user-cnt" id="v-notice-cnt">0</span>
+                        </div>
+                        <ul class="header-user-list">
+                            <li>
+                                <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                            </li>
+                            <li>
+                                <a href="login.html">로그아웃</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="header-icon-menu">
+                        <div class="header-menu-btn"></div>
+                    </div>
+                </div>
+            </header>
+            <!-- //header -->
+            
+            <!-- nav -->
+            <nav class="nav">
+                <h1 class="not-view">nav</h1>
+                
+                <div class="nav-tit">
+                    <ul class="nav-tit-list">
+                        <li>
+                            <a href="javascript:void(0);" onclick="openUserModifyLayer(this);"><span>관리자</span>님</a>
+                        </li>
+                        <li>
+                            <a href="login.html">로그아웃</a>
+                        </li>
+                    </ul>
+                    <button type="button" class="nav-tit-btn" onclick="closeNavMenu(this);">
+                        <span><img src="img/icon-close.png" alt="메뉴닫기"></span>
+                    </button>
+                </div>
+                
+                <ul class="nav-menu-list">
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='map.html';">
+                            <div class="menu-list-img"><img src="img/main-menu01.png" alt="관망도조회"></div>
+                            <div class="menu-list-txt">관망도조회</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='block-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu02.png" alt="블록관망감시"></div>
+                            <div class="menu-list-txt">블록관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='prefie-list01.html';">
+                            <div class="menu-list-img"><img src="img/main-menu03.png" alt="가압장관망감시"></div>
+                            <div class="menu-list-txt">가압장관망감시</div>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu04.png" alt="배수지관망감시"></div>
+                            <div class="menu-list-txt">배수지관망감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watres-list01.html">부평정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list02.html">남동정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list03.html">공촌정수장</a>
+                                </li>
+                                <li>
+                                    <a href="watres-list04.html">수산정수장</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu05.png" alt="수질감시"></div>
+                            <div class="menu-list-txt">수질감시</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="watqua-block-list01.html">블록수질감시</a>
+                                </li>
+                                <li>
+                                    <a href="watqua-end-list01.html">관말수질감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu06.png" alt="관망관리"></div>
+                            <div class="menu-list-txt">관망관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="was-list01.html">야간최소유량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list02.html">유수율 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list03.html">총괄수량수지 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list04.html">누수량 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list05.html">수압 분석</a>
+                                </li>
+                                <li>
+                                    <a href="was-list06.html">수계전환</a>
+                                </li>
+                                <li>
+                                    <a href="was-list07.html">이상감시</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu07.png" alt="계통도"></div>
+                            <div class="menu-list-txt">계통도</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="disdia-list01.html">부평수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list02.html">남동수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list03.html">공촌수계 계통도</a>
+                                </li>
+                                <li>
+                                    <a href="disdia-list04.html">수산수계 계통도</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu08.png" alt="정보관리"></div>
+                            <div class="menu-list-txt">정보관리</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="information-list01.html">유지보수</a>
+                                </li>
+                                <li>
+                                    <a href="information-list02.html">자료실</a>
+                                </li>
+                                <li>
+                                    <a href="information-list03.html">사용자 관리</a>
+                                </li>
+                                <li>
+                                    <a href="information-list04.html">권한정보</a>
+                                </li>
+                                <li>
+                                    <a href="information-list05.html">화면접속 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list06.html">로그인로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list07.html">작업로그 조회</a>
+                                </li>
+                                <li>
+                                    <a href="information-list08.html">계측기 현황</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list09.html">편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list10.html">사업소편집데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list11.html">데이터백업 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list12.html">지도출력데이터 관리</a>
+                                </li>
+                                <li class="menu-pc-item">
+                                    <a href="information-list13.html">통계 관리</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="menu-pc-item">
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area">
+                            <div class="menu-list-img"><img src="img/main-menu10.png" alt="통계현황"></div>
+                            <div class="menu-list-txt">통계현황</div>
+                            <ul class="sub-menu-list">
+                                <li>
+                                    <a href="stats-list01.html">관로통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list02.html">공공측량통계</a>
+                                </li>
+                                <li>
+                                    <a href="stats-list03.html">시설물통계</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- onclick : 하위메뉴가 없을 경우에만 추가 -->
+                        <div class="menu-list-area" onclick="location.href='notice-list.html';">
+                            <div class="menu-list-img"><img src="img/main-menu09.png" alt="공지사항"></div>
+                            <div class="menu-list-txt">공지사항</div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <!-- //nav -->
+            
+            <!-- content -->
+            <!-- c-prefie : 가압장관망감시 내용 -->
+            <section class="c-wrap c-prefie">
+                <!-- c-topbar-area : 페이지 상단바 -->
+                <ul class="c-topbar-area">
+                    <li>가압장관망감시</li>
+                    <li>북부수도사업소</li>
+                </ul>
+                
+                <div class="c-content-area">
+                    <section class="c-list-area">
+                        <!-- c-search-type : 검색방법 -->
+                        <div class="c-search-type">
+                            <div class="search-type-tit">검색방법</div>
+                            <div class="search-type-con">
+                                <!-- data-kind : 데이터종류 (block : 블록관망감시, prefie : 가압장관망감시, watres : 배수지관망감시, watquaBlock : 블록수질감시, watquaEnd : 관말수질감시) -->
+                                <!-- data-assign : 관할사업소 (01 : 중부수도사업소, 02 : 남동부수도사업소, 03 : 북부수도사업소, 04 : 서부수도사업소, 05 : 강화수도사업소) -->
+                                <select id="" name="" data-kind="prefie" data-assign="03" onchange="setSearchType(this);">
+                                    <option value="single">단일검색</option>
+                                    <option value="multiple">다중검색</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <!-- c-search-result : 검색방법 선택결과 -->
+                        <div class="c-search-result">
+                            <!-- search-result-single : 단일검색 선택결과 -->
+                            <div class="search-result-item" id="search-result-single">
+                                <div class="search-result-tit"><span>가압장명</span> 검색</div>
+                                <div class="search-result-con">
+                                    <select id="" name="">
+                                        <option value="">선택</option>
+                                        <option value="효성">효성</option>
+                                        <option value="보람">보람</option>
+                                        <option value="계산1">계산1</option>
+                                        <option value="계양산">계양산</option>
+                                        <option value="계산2">계산2</option>
+                                        <option value="효성">효성</option>
+                                        <option value="보람">보람</option>
+                                        <option value="계산1">계산1</option>
+                                        <option value="계양산">계양산</option>
+                                        <option value="계산2">계산2</option>
+                                    </select>
+                                    <button type="button" class="c-btn01" onclick="getPrefieData('single');">
+                                        <span>검색</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- search-result-multiple : 다중검색 선택결과 -->
+                            <div class="search-result-item" id="search-result-multiple">
+                                <div class="search-result-tit"><span>가압장명</span> 검색</div>
+                                <div class="search-result-con">
+                                    <ul class="search-multiple-list">
+                                        <li>
+                                            <input type="checkbox" id="prefie01" name="" value="효성">
+                                            <label for="prefie01">효성</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie02" name="" value="보람">
+                                            <label for="prefie02">보람</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie03" name="" value="계산1">
+                                            <label for="prefie03">계산1</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie04" name="" value="계양산">
+                                            <label for="prefie04">계양산</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie05" name="" value="계산2">
+                                            <label for="prefie05">계산2</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie06" name="" value="효성">
+                                            <label for="prefie06">효성</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie07" name="" value="보람">
+                                            <label for="prefie07">보람</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie08" name="" value="계산1">
+                                            <label for="prefie08">계산1</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie09" name="" value="계양산">
+                                            <label for="prefie09">계양산</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="prefie10" name="" value="계산2">
+                                            <label for="prefie10">계산2</label>
+                                        </li>
+                                    </ul>
+                                    <button type="button" class="c-btn02" onclick="getPrefieData('multiple');">
+                                        <span>검색</span>
+                                    </button>
+                                    <div class="search-multiple-btn"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- search-result-data : 검색결과 데이터 -->
+                            <div class="search-result-data">
+                                <!-- v-prefie-data : 실시간 가압장관망감시 데이터 -->
+                                <div class="c-table-area" id="v-prefie-data">
+                                    <table class="c-table"></table>
+                                </div>
+                                
+                                <div class="c-table-tit">수압계</div>
+                                <!-- v-prefie-watpre-data : 실시간 가압장관망감시 수압계 데이터 -->
+                                <div class="c-table-area" id="v-prefie-watpre-data">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>시설물명</th>
+                                                <th>개별번호</th>
+                                                <th>등록구</th>
+                                                <th>행정동</th>
+                                                <th>위치</th>
+                                                <th>수압</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+            <!-- //content -->
+            
+            <!-- snsBtn -->
+            <div class="sns-btn-area">
+                <button type="button" class="sns-btn" onclick="">
+                    <span><img src="img/icon-kakao.png" alt="카카오톡"></span>
+                </button>
+            </div>
+            <!-- //snsBtn -->
+            
+            <!-- layer -->
+            <div class="l-wrap">
+                <!-- alert창 -->
+                <div class="layer-wrap" id="alert-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- confirm창 -->
+                <div class="layer-wrap" id="confirm-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-con-area">
+                            <div class="layer-con"></div>
+                        </div>
+                        <div class="layer-btn-area">
+                            <button type="button" class="layer-btn half-btn confirm-btn">
+                                <span>확인</span>
+                            </button>
+                            <button type="button" class="layer-btn half-btn close-btn" onclick="closeLayer(this);">
+                                <span>취소</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 헤더 내정보창 -->
+                <div class="layer-wrap" id="user-modify-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">내정보</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="layer-input-area">
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">아이디</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="admin1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">사용자명</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="관리자1" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">권한그룹</div>
+                                    <div class="layer-input-con">
+                                        <input type="text" id="" name="" value="일반사용자" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">전화번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="tel" id="" name="" value="010-1234-1234" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">이메일</div>
+                                    <div class="layer-input-con">
+                                        <input type="email" id="" name="" value="admin1@test.com" disabled>
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">비밀번호 확인</div>
+                                    <div class="layer-input-con">
+                                        <input type="password" id="" name="">
+                                    </div>
+                                </div>
+                                <div class="layer-input">
+                                    <div class="layer-input-tit">인증서</div>
+                                    <div class="layer-input-con">
+                                        <button type="button" class="c-btn01 half-btn" onclick="">
+                                            <span>인증서 등록</span>
+                                        </button>
+                                        <button type="button" class="c-btn02 half-btn" onclick="">
+                                            <span>인증서 삭제</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="layer-input-btn">
+                                    <button type="button" class="c-btn01" onclick="">
+                                        <span>수정</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 트렌드 분석화면창 -->
+                <div class="layer-wrap layer-all-wrap" id="trand-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">트렌드 분석화면</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeTrandLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <div class="trand-area">
+                                <!-- v-trand-data : 실시간 트렌드분석 데이터 -->
+                                <div class="c-table-area" id="v-trand-data">
+                                    <table class="c-table">
+                                        <colgroup>
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                            <col width="*">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th>항목명</th>
+                                                <th>항목설명</th>
+                                                <th>현재값</th>
+                                                <th>최대값</th>
+                                                <th>최소값</th>
+                                                <th>단위</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- trand-chart-area : 트렌드분석 차트 그리기 -->
+                                <div class="trand-chart-area"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //layer -->
+        </div>
+	</body>
+</html>
