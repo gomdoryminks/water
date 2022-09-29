@@ -56,6 +56,7 @@
         <script src="js/xlsx.full.min.js" defer></script>
         <script src="js/tui-pagination.js" defer></script>
         <script src="js/tui-grid.js" defer></script>
+        <script src="js/html2canvas.min.js" defer></script>
         <script src="js/main.js" defer></script>
 	</head>
 
@@ -429,9 +430,15 @@
                                 </a>
                             </li>
                             <li class="map-pc-icon">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="인쇄보기"></div>
-                                    <div class="map-icon-txt">인쇄보기</div>
+                                <a href="javascript:void(0);" onclick="setMapScreenshot(this);">
+                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="인쇄하기"></div>
+                                    <div class="map-icon-txt">인쇄하기</div>
+                                </a>
+                            </li>
+                            <li class="map-pc-icon">
+                                <a href="javascript:void(0);" onclick="openMapLayer(this,'fileSave');">
+                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="파일저장"></div>
+                                    <div class="map-icon-txt">파일저장</div>
                                 </a>
                             </li>
                             <li>
@@ -760,6 +767,24 @@
                             <div class="map-layer-box">
                                 <div class="map-layer-tit-area">
                                     <div class="map-layer-tit">수용가 정보</div>
+                                    <div class="map-layer-tit-btn">
+                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                        </button>
+                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="map-layer-con-area"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- map-layer08 : 화면캡쳐창 -->
+                        <div class="map-layer-wrap map-layer08">
+                            <div class="map-layer-box">
+                                <div class="map-layer-tit-area">
+                                    <div class="map-layer-tit"></div>
                                     <div class="map-layer-tit-btn">
                                         <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
                                             <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
