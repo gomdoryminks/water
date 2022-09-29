@@ -112,6 +112,18 @@ aside.aside {
     max-height: calc(constant(safe-area-inset-bottom) + 100vh - 402px);
     max-height: calc(env(safe-area-inset-bottom) + 100vh - 402px);
 }
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
+    min-height: calc(constant(safe-area-inset-bottom) + 100vh - 224px);
+    min-height: calc(env(safe-area-inset-bottom) + 100vh - 224px);
+}
+.map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
+    height: calc(constant(safe-area-inset-bottom) + 100vh - 224px);
+    height: calc(env(safe-area-inset-bottom) + 100vh - 224px);
+}
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
+    height: calc(constant(safe-area-inset-bottom) + 100vh - 224px);
+    height: calc(env(safe-area-inset-bottom) + 100vh - 224px);
+}
 
 @media screen and (max-width: 575px) {
     .c-map .map-vertical-icon-area.map-pc-icon {
@@ -186,6 +198,19 @@ aside.aside {
         max-height: calc(constant(safe-area-inset-bottom) + 503px);
         max-height: calc(env(safe-area-inset-bottom) + 503px);
     }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
+        min-height: calc(constant(safe-area-inset-bottom) + 681px);
+        min-height: calc(env(safe-area-inset-bottom) + 681px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
+        height: calc(constant(safe-area-inset-bottom) + 681px);
+        height: calc(env(safe-area-inset-bottom) + 681px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
+        height: calc(constant(safe-area-inset-bottom) + 681px);
+        height: calc(env(safe-area-inset-bottom) + 681px);
+        min-height: auto;
+    }
 }
 
 @media screen and (max-height: 741px) and (min-width: 576px) and (max-width: 767px) {
@@ -222,6 +247,19 @@ aside.aside {
         max-height: calc(constant(safe-area-inset-bottom) + 338px);
         max-height: calc(env(safe-area-inset-bottom) + 338px);
     }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
+        min-height: calc(constant(safe-area-inset-bottom) + 517px);
+        min-height: calc(env(safe-area-inset-bottom) + 517px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
+        height: calc(constant(safe-area-inset-bottom) + 517px);
+        height: calc(env(safe-area-inset-bottom) + 517px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
+        height: calc(constant(safe-area-inset-bottom) + 517px);
+        height: calc(env(safe-area-inset-bottom) + 517px);
+        min-height: auto;
+    }
 }
 
 @media screen and (max-height: 655px) and (max-width: 575px) {
@@ -257,6 +295,19 @@ aside.aside {
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
         max-height: calc(constant(safe-area-inset-bottom) + 305px);
         max-height: calc(env(safe-area-inset-bottom) + 305px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
+        min-height: calc(constant(safe-area-inset-bottom) + 431px);
+        min-height: calc(env(safe-area-inset-bottom) + 431px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
+        height: calc(constant(safe-area-inset-bottom) + 431px);
+        height: calc(env(safe-area-inset-bottom) + 431px);
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
+        height: calc(constant(safe-area-inset-bottom) + 431px);
+        height: calc(env(safe-area-inset-bottom) + 431px);
+        min-height: auto;
     }
 }
 
@@ -388,6 +439,18 @@ aside.aside {
     max-height: calc(constant(safe-area-inset-bottom) + 100vh - 58px);
     max-height: calc(env(safe-area-inset-bottom) + 100vh - 58px);
 }
+.layer-wrap#disdia-add-layer .layer-box .layer-con-area .c-wrap {
+    min-height: calc(constant(safe-area-inset-bottom) + 100vh - 58px);
+    min-height: calc(env(safe-area-inset-bottom) + 100vh - 58px);
+}
+.layer-wrap#disdia-add-layer .layer-box .layer-con-area .c-content-area {
+    height: calc(constant(safe-area-inset-bottom) + 100vh - 58px);
+    height: calc(env(safe-area-inset-bottom) + 100vh - 58px);
+}
+.layer-wrap .layer-box .layer-con-area .disdia-add-list {
+    height: calc(constant(safe-area-inset-bottom) + 100vh - 88px);
+    height: calc(env(safe-area-inset-bottom) + 100vh - 88px);
+}
 
 @media screen and (max-width: 575px) {
     .layer-wrap .layer-box .layer-con-area {
@@ -401,6 +464,18 @@ aside.aside {
     .layer-all-wrap .layer-box .layer-tit-area ~ .layer-con-area {
         max-height: calc(constant(safe-area-inset-bottom) + 100vh - 52px);
         max-height: calc(env(safe-area-inset-bottom) + 100vh - 52px);
+    }
+    .layer-wrap#disdia-add-layer .layer-box .layer-con-area .c-wrap {
+        min-height: calc(constant(safe-area-inset-bottom) + 100vh - 52px);
+        min-height: calc(env(safe-area-inset-bottom) + 100vh - 52px);
+    }
+    .layer-wrap#disdia-add-layer .layer-box .layer-con-area .c-content-area {
+        height: calc(constant(safe-area-inset-bottom) + 100vh - 52px);
+        height: calc(env(safe-area-inset-bottom) + 100vh - 52px);
+    }
+    .layer-wrap .layer-box .layer-con-area .disdia-add-list {
+        height: calc(constant(safe-area-inset-bottom) + 100vh - 72px);
+        height: calc(env(safe-area-inset-bottom) + 100vh - 72px);
     }
 }
 
