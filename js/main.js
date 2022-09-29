@@ -47,6 +47,10 @@ let datbacGrid;
 let mapdatGrid;
 //20220720 수정부분 end
 
+//20220926 수정부분 start
+let disdiaGrid;
+//20220926 수정부분 end
+
 $(function() {
     //20220711 수정부분 start
     //ios(아이폰, 아이패드, 아이팟) 전용 css 적용
@@ -135,6 +139,20 @@ $(function() {
             }
         });
         //20220803 수정부분 end
+        
+        //20220926 수정부분 start
+        //관망도조회 인쇄하기창 리사이즈시 이미지에 클래스 설정
+        if ($("#map-screenshot canvas").length > 0) {
+            var screenshotAreaHeight = $("#map-screenshot").height();
+            var screenshotCanvasHeight = $("#map-screenshot").find("canvas").height();
+            
+            if (screenshotAreaHeight > screenshotCanvasHeight) {
+                $("#map-screenshot").addClass("not-over");
+            } else {
+                $("#map-screenshot").removeClass("not-over");
+            }
+        }
+        //20220926 수정부분 end
     });
     
     //헤더 사용자메뉴창 보이기&숨기기
@@ -298,7 +316,10 @@ $(function() {
         });
         
         //20220803 수정부분 start
-        if (!$(this).hasClass("map-layer00") && !$(this).hasClass("map-layer05")) {
+        //20220926 수정부분 start
+        if (!$(this).hasClass("map-layer00") && !$(this).hasClass("map-layer05") && !$(this).hasClass("map-layer08")) {
+        //20220926 수정부분 end
+            
             $(this).resizable({
                 containment: '.c-content-area'
             });
@@ -437,6 +458,13 @@ $(function() {
         setMapdatGrid();
     }
     //20220720 수정부분 end
+    
+    //20220926 수정부분 start
+    //수계전환 그리드 그리기
+    if ($("#disdia-grid-area").length > 0) {
+        setDisdiaGrid();
+    }
+    //20220926 수정부분 end
 });
 
 //실시간으로 메인 현재 날짜시간 가져오기
@@ -2650,6 +2678,126 @@ function setMapdatGrid() {
 }
 //20220720 수정부분 end
 
+//20220926 수정부분 start
+//수계전환 그리드 그리기
+function setDisdiaGrid() {
+    //그리드 그리기
+    $("#disdia-grid-area").append("<div id='disdiaGrid' class='dynamicGrid'></div>");
+    
+    var gridBodyHeight = 'auto';
+    var gridData = [];
+    var gridColumns = [];
+    var gridHeader = {};
+    var hdComplexColumns = [];
+    var gridSummary = {};
+    var smColumnContent = {};
+    
+    //그리드 body 높이 설정
+    gridBodyHeight = 217;
+    
+    //데이터 가져오기
+    for (var i=0; i<10; i++) {
+        gridData.push({column00:(i + 1),column01:'2022-09-26 00:00',column02:'2022-09-26 00:00',_attributes:{className:{row:['grid-pointer']}}});
+    }
+    
+    //전체 항목 가져오기
+    gridColumns.push({header:'번호',name:'column00',minWidth: '60',whiteSpace: 'normal'});
+    gridColumns.push({header:'시작일',name:'column01',minWidth: '120',whiteSpace: 'normal'});
+    gridColumns.push({header:'종료일',name:'column02',minWidth: '120',whiteSpace: 'normal'});
+    
+    disdiaGrid = new tui.Grid({
+        el: document.getElementById('disdiaGrid'),
+        scrollX: true,
+        scrollY: true,
+        rowHeaders: ['checkbox'],
+        rowHeight: 'auto',
+        bodyHeight: gridBodyHeight,
+        minBodyHeight: 137,
+        data: gridData,
+        columns: gridColumns,
+        header: gridHeader,
+        summary: gridSummary,
+        showDummyRows: true
+    });
+    
+    //리사이즈시
+    $(window).resize(function() {
+        var gridReBodyHeight = 'auto';
+        
+        //그리드 body 높이 설정
+        gridReBodyHeight = 217;
+        
+        disdiaGrid.setBodyHeight(gridReBodyHeight);
+    });
+    
+    //수계전환 항목 체크시
+    disdiaGrid.on("check",function(event) {
+        var gridSelected = $("#disdia-grid-area .tui-grid-body-area").attr("grid-selected");
+        
+        if (gridSelected == undefined) {
+            gridSelected = "";
+        }
+        
+        if (gridSelected != "") {
+            disdiaGrid.uncheck(gridSelected);
+            
+            disdiaGrid.removeRowClassName(gridSelected,"grid-label00");
+        }
+        
+        disdiaGrid.addRowClassName(event.rowKey,"grid-label00");
+        
+        $("#disdia-grid-area .tui-grid-body-area").attr("grid-selected",event.rowKey);
+    });
+    
+    //수계전환 항목 체크해제시
+    disdiaGrid.on("uncheck",function(event) {
+        disdiaGrid.removeRowClassName(event.rowKey,"grid-label00");
+        
+        $("#disdia-grid-area .tui-grid-body-area").attr("grid-selected","");
+    });
+    
+    //수계전환 항목 클릭시
+    disdiaGrid.on("click",function(event) {
+        if (event.rowKey != undefined && event.columnName != "_checked") {
+            var gridCheckedArr = disdiaGrid.getCheckedRowKeys();
+            
+            if (gridCheckedArr.indexOf(event.rowKey) > -1) {
+                disdiaGrid.uncheck(event.rowKey);
+            } else {
+                disdiaGrid.check(event.rowKey);
+            }
+        }
+    });
+}
+
+//검색조건에 맞춰서 수계전환 그리드 다시 그리기
+function setDisdiaGridSearch() {
+    $(".c-search-wrap").removeClass("on");
+    
+    $("#disdiaGrid").remove();
+    
+    setDisdiaGrid();
+}
+//20220926 수정부분 end
+
+//20220928 수정부분 start
+function openCanvasPrint(canvasUrl) {
+    var printWindow = window.open('', '_blank', 'width=1080,height=764');
+    
+    printWindow.document.write('<html><head><title></title>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write('<img src="' + canvasUrl + '">');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.focus(); 
+    
+    setTimeout(function() {
+        printWindow.print();
+        printWindow.close();
+    }, 400);
+}
+//20220928 수정부분 end
+
 //트렌드분석 데이터 가져오기
 function getTrandData(type,obj) {
     var dataHtml = "";
@@ -2779,6 +2927,10 @@ function getDynamicGridExcel(gridId) {
             mapdatGrid.export('xlsx');
         //20220720 수정부분 end
             
+        //20220926 수정부분 start
+        } else if (gridId == "disdiaGrid" && disdiaGrid != undefined) {
+            disdiaGrid.export("xlsx");
+        //20220926 수정부분 end
         }
     }
 }
@@ -2968,6 +3120,28 @@ function openSqlSearchLayer(obj) {
     });
 }
 //20220720 수정부분 end
+
+//20220926 수정부분 start
+//수계전환 추가창 열기
+function openDisdiaAddLayer(obj) {
+    $("#disdia-add-layer").find(".c-search-wrap").removeClass("on");
+    
+    $("#disdia-add-layer").addClass("on");
+    
+    //datepicker 설정
+    $(".c-date-input").each(function() {
+        $(this).datepicker();
+    });
+    
+    var scrollTop = parseInt($(document).scrollTop());
+    
+    $("body").css("top", -scrollTop + "px");
+    
+    $("body").addClass("scroll-disable").on("scroll touchmove", function (event) {
+        event.preventDefault();
+    });
+}
+//20220926 수정부분 end
 
 //계측기현황 신규TAG목록창 열기
 function openNewTagLayer() {
@@ -3487,6 +3661,25 @@ function selMapSearchSelect(obj) {
     var mapLayerObj = $(obj).closest(".map-layer-wrap");
     var selSelectTxt = $(obj).next("label").text();
     
+    //20220926 수정부분 start
+    if ($(obj).val() == "지번주소") {
+        $(mapLayerObj).find(".map-search-box").find(".map-search-input").css("display", "none");
+        $(mapLayerObj).find(".map-search-box").find(".map-search-btn").css("display", "none");
+        $(mapLayerObj).find(".map-search-building-form").removeClass("on");
+        $(mapLayerObj).find(".map-search-address-form").addClass("on");
+    } else if ($(obj).val() == "건물명주소") {
+        $(mapLayerObj).find(".map-search-box").find(".map-search-input").css("display", "none");
+        $(mapLayerObj).find(".map-search-box").find(".map-search-btn").css("display", "none");
+        $(mapLayerObj).find(".map-search-address-form").removeClass("on");
+        $(mapLayerObj).find(".map-search-building-form").addClass("on");
+    } else {
+        $(mapLayerObj).find(".map-search-box").find(".map-search-input").css("display", "");
+        $(mapLayerObj).find(".map-search-box").find(".map-search-btn").css("display", "");
+        $(mapLayerObj).find(".map-search-address-form").removeClass("on");
+        $(mapLayerObj).find(".map-search-building-form").removeClass("on");
+    }
+    //20220926 수정부분 end
+    
     $(mapLayerObj).find(".map-search-select").text(selSelectTxt);
     $(mapLayerObj).find(".map-search-select-list").removeClass("on");
 }
@@ -3512,6 +3705,203 @@ function selMapSearchInput(obj) {
     $(mapLayerObj).find(".map-search-input").val(selInputTxt);
     $(mapLayerObj).find(".map-search-input-list").removeClass("on");
 }
+
+//20220926 수정부분 start
+//관망도조회 검색 지번주소 검색 해제
+function setMapAddressClear(obj) {
+    var mapLayerObj = $(obj).closest(".map-layer-wrap");
+    
+    $(mapLayerObj).find(".map-search-address-form").find(".address-form-item1").find("select").find("option").eq(0).prop("selected", true);
+    selMapAddress($(mapLayerObj).find(".map-search-address-form").find(".address-form-item1").find("select").find("option").eq(0), "address1");
+}
+
+//관망도조회 검색 지번주소 옵션 선택 (type : address1 (등록구 선택시), address2 (읍/면/동 선택시))
+function selMapAddress(obj, type) {
+    var mapLayerObj = $(obj).closest(".map-layer-wrap");
+    var addressVal = $(obj).val();
+    var addressHtml = "";
+    var addressHtml2 = "";
+    
+    //초기화
+    $(mapLayerObj).find(".map-search-address-form").find("input[type='text']").val("");
+    $(mapLayerObj).find(".map-search-address-form").find("input[type='checkbox']").prop("checked", false);
+    
+    if (type == "address1") {
+        $(mapLayerObj).find(".map-search-address-form").find(".address-form-item3").removeClass("on");
+        
+        addressHtml += "<option value=''>선택</option>";
+        addressHtml2 += "<option value=''>선택</option>";
+        
+        if (addressVal != "") {
+            addressHtml += "<option value='강화읍'>강화읍</option>";
+            addressHtml += "<option value='교동면'>교동면</option>";
+            addressHtml += "<option value='길상면'>길상면</option>";
+            addressHtml += "<option value='내가면'>내가면</option>";
+            addressHtml += "<option value='불은면'>불은면</option>";
+            addressHtml += "<option value='삼산면'>삼산면</option>";
+            addressHtml += "<option value='서도면'>서도면</option>";
+            addressHtml += "<option value='선원면'>선원면</option>";
+            addressHtml += "<option value='송해면'>송해면</option>";
+            addressHtml += "<option value='양도면'>양도면</option>";
+            addressHtml += "<option value='양사면'>양사면</option>";
+            addressHtml += "<option value='하점면'>하점면</option>";
+            addressHtml += "<option value='화도면'>화도면</option>";
+            
+            //값이 강화군, 옹진군일 경우에만 산 항목 노출
+            if (addressVal == "강화군" || addressVal == "옹진군") {
+                $(mapLayerObj).find(".map-search-address-form").find(".address-form-item3").addClass("on");
+            }
+        }
+        
+        //읍/면/동 항목 셀렉트박스에 옵션 설정
+        $(mapLayerObj).find(".map-search-address-form").find(".address-form-item2").find("select").html(addressHtml);
+        
+        //산 항목 셀렉트박스에 옵션 설정
+        $(mapLayerObj).find(".map-search-address-form").find(".address-form-item3").find("select").html(addressHtml2);
+    } else if (type == "address2") {
+        addressHtml2 += "<option value=''>선택</option>";
+        
+        if (addressVal != "") {
+            addressHtml2 += "<option value='갑곶리'>갑곶리</option>";
+            addressHtml2 += "<option value='관청리'>관청리</option>";
+            addressHtml2 += "<option value='국화리'>국화리</option>";
+            addressHtml2 += "<option value='남산리'>남산리</option>";
+            addressHtml2 += "<option value='대산리'>대산리</option>";
+            addressHtml2 += "<option value='신문리'>신문리</option>";
+            addressHtml2 += "<option value='옥림리'>옥림리</option>";
+            addressHtml2 += "<option value='용정리'>용정리</option>";
+            addressHtml2 += "<option value='월곳리'>월곳리</option>";
+        }
+        
+        //산 항목 셀렉트박스에 옵션 설정
+        $(mapLayerObj).find(".map-search-address-form").find(".address-form-item3").find("select").html(addressHtml2);
+    }
+}
+
+//관망도조회 검색 건물명주소 검색 해제
+function setMapBuildingClear(obj) {
+    var mapLayerObj = $(obj).closest(".map-layer-wrap");
+    
+    $(mapLayerObj).find(".map-search-building-form").find(".building-form-item1").find("select").find("option").eq(0).prop("selected", true);
+    $(mapLayerObj).find(".map-search-building-form").find("input[type='text']").val("");
+}
+
+//관망도조회 화면캡쳐 영역 설정
+function setMapScreenshot(obj) {
+    //캡쳐 기능 활성화
+    var height = window.innerHeight;
+    var width = $(document).width();
+    var $mask = $('<div id="screenshot_mask"></div>').css("border-width", "0 0 " + height + "px 0");
+    var $focus = $('<div id="screenshot_focus"></div>');
+    
+    //dimmed 추가
+    $("body").append($mask);
+    
+    //마우스 커서에 따라 캡쳐 영역을 만들 div
+    $("body").append($focus);
+    
+    var selectArea = false;
+    
+    $("body").one("mousedown", function(e) {
+        //캡쳐 영역 선택 시작
+        e.preventDefault();
+        
+        selectArea = true;
+        startX = e.clientX;
+        startY = e.clientY;
+    }).one("mouseup", function(e) {
+        //캡쳐 시작
+        selectArea = false;
+        
+        $("body").off("mousemove", mousemove);
+        
+        //이벤트 삭제
+        $("#screenshot_focus").remove();
+        
+        //마우스 포커스 삭제
+        $("#screenshot_mask").remove();
+        
+        //딤 삭제
+        var x = e.clientX;
+        var y = e.clientY;
+        var top = Math.min(y, startY);
+        var left = Math.min(x, startX);
+        var width = Math.max(x, startX) - left;
+        var height = Math.max(y, startY) - top;
+        
+        html2canvas(document.body).then(function(canvas) {
+            //전체 화면 캡쳐
+            var img = canvas.getContext("2d").getImageData(left, top, width, height);
+            
+            //선택 영역만큼 crop
+            var c = document.createElement("canvas");
+            
+            c.width = width;
+            c.height = height;
+            c.getContext("2d").putImageData(img, 0, 0);
+            
+            //crop한 이미지 저장
+            //save(c);
+            openMapLayer(obj, "screenshot");
+            document.querySelector("#map-screenshot").appendChild(c);
+            
+            if ($("#map-screenshot canvas").length > 0) {
+                var screenshotAreaHeight = $("#map-screenshot").height();
+                var screenshotCanvasHeight = $("#map-screenshot").find("canvas").height();
+                
+                if (screenshotAreaHeight > screenshotCanvasHeight) {
+                    $("#map-screenshot").addClass("not-over");
+                } else {
+                    $("#map-screenshot").removeClass("not-over");
+                }
+            }
+            
+            //20220928 수정부분 start
+            var mapLayerObj = $("#map-screenshot").closest(".map-layer-wrap");
+            
+            $(mapLayerObj).find(".print-btn").click(function() {
+                openCanvasPrint(c.toDataURL("image/jpeg"));
+            });
+            //20220928 수정부분 end
+        });
+    }).on("mousemove", mousemove);
+    
+    //캡쳐 영역 크기 변경
+    function mousemove(e) {
+        var x = e.clientX;
+        var y = e.clientY;
+        
+        //마우스 커서 따라 좌표 포커스 이동
+        $focus.css("left", x);
+        $focus.css("top", y);
+        
+        if (selectArea) {
+            //캡쳐 영역 선택 그림
+            var top = Math.min(y, startY);
+            var right = width - Math.max(x, startX);
+            var bottom = height - Math.max(y, startY);
+            var left = Math.min(x, startX);
+            
+            $mask.css("border-width", [top + "px", right + "px", bottom + "px", left + "px"].join(" "));
+        }
+    }
+    
+    function save(canvas) {
+        //파일로 저장
+        if (navigator.msSaveBlob) {
+            var blob = canvas.msToBlob();
+            
+            return navigator.msSaveBlob(blob, "파일명.jpg");
+        } else {
+            var el = document.getElementById("target");
+            
+            el.href = canvas.toDataURL("image/jpeg");
+            el.download = "파일명.jpg";
+            el.click();
+        }
+    }
+}
+//20220926 수정부분 end
 
 //관망도조회 상단 탭 클릭시
 function setMapTopTab(obj) {
@@ -5155,54 +5545,62 @@ function openMapLayer(obj,mapLayerType) {
 
         //map-search-select-list : 셀렉트박스 눌렀을 때 노출
         mapLayerHtml += "    <ul class='map-search-select-list'>";
+        
+        //20220926 수정부분 start
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect00' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect00' name='mapSearchSelect' value='전체'>";
         mapLayerHtml += "            <label for='mapSearchSelect00'>전체</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect01' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect01' name='mapSearchSelect' value='고객번호'>";
         mapLayerHtml += "            <label for='mapSearchSelect01'>고객번호</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect02' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect02' name='mapSearchSelect' value='블록번호'>";
         mapLayerHtml += "            <label for='mapSearchSelect02'>블록번호</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect03' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect03' name='mapSearchSelect' value='계측기번호'>";
         mapLayerHtml += "            <label for='mapSearchSelect03'>계측기번호</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect04' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect04' name='mapSearchSelect' value='도엽번호'>";
         mapLayerHtml += "            <label for='mapSearchSelect04'>도엽번호</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect05' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect05' name='mapSearchSelect' value='수전번호'>";
         mapLayerHtml += "            <label for='mapSearchSelect05'>수전번호</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect06' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect06' name='mapSearchSelect' value='배수지명'>";
         mapLayerHtml += "            <label for='mapSearchSelect06'>배수지명</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect07' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect07' name='mapSearchSelect' value='가압장명'>";
         mapLayerHtml += "            <label for='mapSearchSelect07'>가압장명</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect08' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect08' name='mapSearchSelect' value='블록명'>";
         mapLayerHtml += "            <label for='mapSearchSelect08'>블록명</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect09' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect09' name='mapSearchSelect' value='인천주소'>";
         mapLayerHtml += "            <label for='mapSearchSelect09'>인천주소</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect10' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect10' name='mapSearchSelect' value='지번주소'>";
         mapLayerHtml += "            <label for='mapSearchSelect10'>지번주소</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "        <li>";
-        mapLayerHtml += "            <input type='radio' id='mapSearchSelect11' name='mapSearchSelect'>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect11' name='mapSearchSelect' value='도로명주소'>";
         mapLayerHtml += "            <label for='mapSearchSelect11'>도로명주소</label>";
         mapLayerHtml += "        </li>";
+        mapLayerHtml += "        <li>";
+        mapLayerHtml += "            <input type='radio' id='mapSearchSelect12' name='mapSearchSelect' value='건물명주소'>";
+        mapLayerHtml += "            <label for='mapSearchSelect12'>건물명주소</label>";
+        mapLayerHtml += "        </li>";
+        //20220926 수정부분 end
+        
         mapLayerHtml += "    </ul>";
 
         //map-search-input-list : 텍스트박스 입력했을 때 노출
@@ -5228,6 +5626,116 @@ function openMapLayer(obj,mapLayerType) {
         mapLayerHtml += "            <label for='mapSearchInput04'>138</label>";
         mapLayerHtml += "        </li>";
         mapLayerHtml += "    </ul>";
+        
+        //20220926 수정부분 start
+        //map-search-address-form : 지번주소 선택했을 때 노출
+        mapLayerHtml += "    <div class='c-input-area map-search-address-form'>";
+        
+        //address-form-item1 : 지번주소 등록구 항목
+        mapLayerHtml += "        <div class='c-input address-form-item1'>";
+        mapLayerHtml += "            <div class='c-input-tit'>등록구</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <select id='' name='' onchange='selMapAddress(this,\"address1\");'>";
+        mapLayerHtml += "                    <option value=''>선택</option>";
+        mapLayerHtml += "                    <option value='강화군'>강화군</option>";
+        mapLayerHtml += "                    <option value='계양구'>계양구</option>";
+        mapLayerHtml += "                    <option value='남동구'>남동구</option>";
+        mapLayerHtml += "                    <option value='동구'>동구</option>";
+        mapLayerHtml += "                    <option value='미추홀구'>미추홀구</option>";
+        mapLayerHtml += "                    <option value='부평구'>부평구</option>";
+        mapLayerHtml += "                    <option value='서구'>서구</option>";
+        mapLayerHtml += "                    <option value='연수구'>연수구</option>";
+        mapLayerHtml += "                    <option value='옹진군'>옹진군</option>";
+        mapLayerHtml += "                    <option value='중구'>중구</option>";
+        mapLayerHtml += "                </select>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        
+        //address-form-item2 : 지번주소 읍/면/동 항목
+        mapLayerHtml += "        <div class='c-input address-form-item2'>";
+        mapLayerHtml += "            <div class='c-input-tit'>읍/면/동</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <select id='' name='' onchange='selMapAddress(this,\"address2\");'>";
+        mapLayerHtml += "                    <option value=''>선택</option>";
+        mapLayerHtml += "                </select>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        
+        //address-form-item3 : 지번주소 리 항목
+        mapLayerHtml += "        <div class='c-input address-form-item3'>";
+        mapLayerHtml += "            <div class='c-input-tit'>리</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <select id='' name=''>";
+        mapLayerHtml += "                    <option value=''>선택</option>";
+        mapLayerHtml += "                </select>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "        <div class='c-input'>";
+        mapLayerHtml += "            <div class='c-input-tit'>산</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <div class='only-check'>";
+        mapLayerHtml += "                    <input type='checkbox' id='addressCheck00' name=''>";
+        mapLayerHtml += "                    <label for='addressCheck00'></label>";
+        mapLayerHtml += "                </div>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "        <div class='c-input'>";
+        mapLayerHtml += "            <div class='c-input-tit'>지번</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <input type='text' id='' name='' class='half-input'>";
+        mapLayerHtml += "                <span class='separate'>-</span>";
+        mapLayerHtml += "                <input type='text' id='' name='' class='half-input'>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "        <div class='c-input c-input-btn'>";
+        mapLayerHtml += "            <button type='button' onclick='setMapAddressClear(this);'>";
+        mapLayerHtml += "                <span>해제</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "            <button type='button' class='c-btn01' onclick=''>";
+        mapLayerHtml += "                <span>검색</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </div>";
+        
+        //map-search-building-form : 건물명주소 선택했을 때 노출
+        mapLayerHtml += "    <div class='c-input-area map-search-building-form'>";
+        
+        //building-form-item1 : 건물명주소 검색범위 항목
+        mapLayerHtml += "        <div class='c-input building-form-item1'>";
+        mapLayerHtml += "            <div class='c-input-tit'>검색범위</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <select id='' name=''>";
+        mapLayerHtml += "                    <option value=''>인천광역시</option>";
+        mapLayerHtml += "                    <option value='강화군'>강화군</option>";
+        mapLayerHtml += "                    <option value='계양구'>계양구</option>";
+        mapLayerHtml += "                    <option value='남동구'>남동구</option>";
+        mapLayerHtml += "                    <option value='동구'>동구</option>";
+        mapLayerHtml += "                    <option value='미추홀구'>미추홀구</option>";
+        mapLayerHtml += "                    <option value='부평구'>부평구</option>";
+        mapLayerHtml += "                    <option value='서구'>서구</option>";
+        mapLayerHtml += "                    <option value='연수구'>연수구</option>";
+        mapLayerHtml += "                    <option value='옹진군'>옹진군</option>";
+        mapLayerHtml += "                    <option value='중구'>중구</option>";
+        mapLayerHtml += "                </select>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "        <div class='c-input'>";
+        mapLayerHtml += "            <div class='c-input-tit'>건물명</div>";
+        mapLayerHtml += "            <div class='c-input-con'>";
+        mapLayerHtml += "                <input type='text' id='' name=''>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "        <div class='c-input c-input-btn'>";
+        mapLayerHtml += "            <button type='button' onclick='setMapBuildingClear(this);'>";
+        mapLayerHtml += "                <span>해제</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "            <button type='button' class='c-btn01' onclick=''>";
+        mapLayerHtml += "                <span>검색</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </div>";
+        //20220926 수정부분 end
+        
         mapLayerHtml += "</div>";
     } else if (mapLayerType == "layer") {
         mapLayerId = "map-layer00";
@@ -12266,8 +12774,110 @@ function openMapLayer(obj,mapLayerType) {
         mapLayerHtml += "        <div class='dynamic-grid-area' id='map-watersupply-grid-area'></div>";
         mapLayerHtml += "    </div>";
         mapLayerHtml += "</div>";
-    }
     //20220719 수정부분 end
+        
+    //20220926 수정부분 start
+    } else if (mapLayerType == "screenshot") {
+        mapLayerId = "map-layer08";
+        mapLayerTit = "인쇄하기";
+        
+        mapLayerHtml += "<section class='c-wrap c-search-wrap'>";
+        mapLayerHtml += "    <div class='c-search-aside-mask'></div>";
+        mapLayerHtml += "    <div class='c-search-aside-btn'></div>";
+        mapLayerHtml += "    <aside class='aside'>";
+        mapLayerHtml += "        <h1 class='not-view'>aside</h1>";
+        
+        //aside-btn-area : 검색 버튼
+        mapLayerHtml += "        <div class='aside-btn-area'>";
+        
+        //20220928 수정부분 start
+        mapLayerHtml += "            <button type='button' class='c-btn01 aside-btn print-btn' onclick=''>";
+        //20220928 수정부분 end
+        
+        mapLayerHtml += "                <span>인쇄하기</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </aside>";
+        mapLayerHtml += "    <div class='c-search-area'>";
+        mapLayerHtml += "        <div class='c-content-area'>";
+        mapLayerHtml += "            <section class='c-list-area'>";
+        
+        //map-screenshot : 화면 캡쳐 canvas
+        mapLayerHtml += "                <div class='map-screenshot-area' id='map-screenshot'></div>";
+        mapLayerHtml += "            </section>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </div>";
+        mapLayerHtml += "</section>";
+    } else if (mapLayerType == "fileSave") {
+        mapLayerId = "map-layer08";
+        mapLayerTit = "파일저장";
+        
+        mapLayerHtml += "<section class='c-wrap c-search-wrap'>";
+        mapLayerHtml += "    <div class='c-search-aside-mask'></div>";
+        mapLayerHtml += "    <div class='c-search-aside-btn'></div>";
+        mapLayerHtml += "    <aside class='aside'>";
+        mapLayerHtml += "        <h1 class='not-view'>aside</h1>";
+        
+        //aside-date-area : 검색할 조건 선택
+        mapLayerHtml += "        <div class='aside-search-area'>";
+        mapLayerHtml += "            <div class='aside-search-item'>";
+        mapLayerHtml += "                <div class='aside-search-item-tit'>파일명</div>";
+        mapLayerHtml += "                <div class='aside-search-item-con'>";
+        mapLayerHtml += "                    <input type='text' id='' name='' placeholder='파일명' />";
+        mapLayerHtml += "                </div>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "            <div class='aside-search-item'>";
+        mapLayerHtml += "                <div class='aside-search-item-tit'>페이지 설정</div>";
+        mapLayerHtml += "                <div class='aside-search-item-con'>";
+        mapLayerHtml += "                    <select id='' name=''>";
+        mapLayerHtml += "                        <option value='A4가로 - 지도'>A4가로 - 지도</option>";
+        mapLayerHtml += "                        <option value='A4세로 - 지도'>A4세로 - 지도</option>";
+        mapLayerHtml += "                        <option value='A3가로 - 지도'>A3가로 - 지도</option>";
+        mapLayerHtml += "                        <option value='A3세로 - 지도'>A3세로 - 지도</option>";
+        mapLayerHtml += "                    </select>";
+        mapLayerHtml += "                </div>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "            <div class='aside-search-item'>";
+        mapLayerHtml += "                <div class='aside-search-item-tit'>파일 형식</div>";
+        mapLayerHtml += "                <div class='aside-search-item-con'>";
+        mapLayerHtml += "                    <select id='' name=''>";
+        mapLayerHtml += "                        <option value='PDF'>PDF</option>";
+        mapLayerHtml += "                        <option value='PNG'>PNG</option>";
+        mapLayerHtml += "                        <option value='JPG'>JPG</option>";
+        mapLayerHtml += "                    </select>";
+        mapLayerHtml += "                </div>";
+        mapLayerHtml += "            </div>";
+        mapLayerHtml += "        </div>";
+        
+        //aside-btn-area : 검색 버튼
+        mapLayerHtml += "        <div class='aside-btn-area'>";
+        mapLayerHtml += "            <button type='button' class='c-btn01 aside-btn' onclick=''>";
+        mapLayerHtml += "                <span>파일저장</span>";
+        mapLayerHtml += "            </button>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </aside>";
+        mapLayerHtml += "    <div class='c-search-area'>";
+        mapLayerHtml += "        <div class='c-content-area'>";
+        mapLayerHtml += "            <section class='c-list-area'>";
+        mapLayerHtml += "                <div class='map-screenshot-area'></div>";
+        mapLayerHtml += "            </section>";
+        mapLayerHtml += "        </div>";
+        mapLayerHtml += "    </div>";
+        mapLayerHtml += "</section>";
+    //20220926 수정부분 end
+    }
+    
+    //20220926 수정부분 start
+    if (mapLayerId == "map-layer00") {
+        if ($(".map-layer08").hasClass("on")) {
+            closeMapLayer($(".map-layer08").find(".map-layer-box").find(".map-layer-tit-area").find(".map-layer-tit-btn").find(".map-close-btn"));
+        }
+    } else if (mapLayerId == "map-layer08") {
+        if ($(".map-layer00").hasClass("on")) {
+            closeMapLayer($(".map-layer00").find(".map-layer-box").find(".map-layer-tit-area").find(".map-layer-tit-btn").find(".map-close-btn"));
+        }
+    }
+    //20220926 수정부분 end
     
     //20220708 수정부분 start
     var dataOpenCnt = (parseInt($("." + mapLayerId).attr("data-open-cnt")) > 0) ? parseInt($("." + mapLayerId).attr("data-open-cnt")) : 0;
@@ -12279,7 +12889,10 @@ function openMapLayer(obj,mapLayerType) {
     //20220803 수정부분 end
     
     //20220712 수정부분 start
-    if (mapLayerId == "map-layer00" && mapLayerType != "layer") {
+    //20220926 수정부분 start
+    if ((mapLayerId == "map-layer00" && mapLayerType != "layer") || mapLayerId == "map-layer08") {
+    //20220926 수정부분 end
+        
         $("." + mapLayerId).css({top:"",left:""});
         
         $(".c-map .map-icon-list>li").removeClass("on");
@@ -12520,6 +13133,17 @@ function openMapLayer(obj,mapLayerType) {
     $("." + mapLayerId + " .map-setting-area .map-setting-all-item .map-setting-check input[type='checkbox']").click(function() {
         setMapSettingCheck($(this),"check");
     });
+    
+    //20220926 수정부분 start
+    //좌측에 검색영역 보이기&숨기기
+    $(".c-search-wrap .c-search-aside-btn").off().on("click", function() {
+        if ($(this).parent(".c-search-wrap").hasClass("on")) {
+            $(this).parent(".c-search-wrap").removeClass("on");
+        } else {
+            $(this).parent(".c-search-wrap").addClass("on");
+        }
+    });
+    //20220926 수정부분 end
 }
 
 //관망도조회 레이어 팝업 내용 보이기&숨기기 
@@ -12547,7 +13171,10 @@ function showMapLayer(obj) {
 
 //관망도조회 레이어 팝업 닫기
 function closeMapLayer(obj) {
-    if ($(obj).closest(".map-layer-wrap").hasClass("map-layer00")) {
+    //20220926 수정부분 start
+    if ($(obj).closest(".map-layer-wrap").hasClass("map-layer00") || $(obj).closest(".map-layer-wrap").hasClass("map-layer08")) {
+    //20220926 수정부분 end
+        
         $(".c-map .map-icon-list>li").removeClass("on");
     }
     
