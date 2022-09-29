@@ -392,8 +392,11 @@
                     
                     <!-- aside-btn-area : 검색 버튼 -->
                     <div class="aside-btn-area">
-                        <button type="button" class="c-btn01 aside-btn" onclick="">
+                        <button type="button" class="c-btn01 aside-btn" onclick="setDisdiaGridSearch();">
                             <span>조회</span>
+                        </button>
+                        <button type="button" class="c-btn01 aside-btn" onclick="openDisdiaAddLayer(this);">
+                            <span>추가</span>
                         </button>
                     </div>
                 </aside>
@@ -407,7 +410,7 @@
 
                     <div class="c-content-area">
                         <section class="c-list-area">
-                            <div class="c-input-area">
+                            <!--<div class="c-input-area">
                                 <div class="c-input half-input">
                                     <div class="c-input-tit">수계전환 기간</div>
                                     <div class="c-input-con">
@@ -422,7 +425,10 @@
                                         <input type="text" id="" name="" placeholder="수계전환 작업명">
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
+                            
+                            <!-- dynamic-grid-area : 동적 그리드 그리기 -->
+                            <div class="dynamic-grid-area" id="disdia-grid-area"></div>
                             
                             <!-- horizontal-diagram-area : 계통도가 가로로 노출됨 -->
                             <div class="diagram-area horizontal-diagram-area">
@@ -838,6 +844,117 @@
                                 <!-- trand-chart-area : 트렌드분석 차트 그리기 -->
                                 <div class="trand-chart-area"></div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 수계전환 추가창 -->
+                <div class="layer-wrap layer-all-wrap" id="disdia-add-layer">
+                    <div class="layer-mask"></div>
+                    <div class="layer-box">
+                        <div class="layer-tit-area">
+                            <div class="layer-tit">수계전환 추가</div>
+                            <button type="button" class="layer-tit-btn" onclick="closeTrandLayer(this);">
+                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                            </button>
+                        </div>
+                        <div class="layer-con-area">
+                            <section class="c-wrap c-search-wrap">
+                                <div class="c-search-aside-mask"></div>
+                                <div class="c-search-aside-btn"></div>
+                                
+                                <!-- aside -->
+                                <aside class="aside">
+                                    <h1 class="not-view">aside</h1>
+                                    
+                                    <!-- aside-date-area : 검색할 조건 선택 -->
+                                    <div class="aside-search-area">
+                                        <div class="aside-search-tit">데이터 조회</div>
+                                        
+                                        <div class="aside-search-item">
+                                            <div class="aside-search-item-tit">날짜선택</div>
+                                            <div class="aside-search-item-con">
+                                                <input type="text" id="startDate2" name="" class="c-date-input" readonly placeholder="시작일선택" autocomplete="off">
+                                                <input type="text" id="endDate2" name="" class="c-date-input" readonly placeholder="종료일선택" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="aside-search-item">
+                                            <div class="aside-search-item-tit">정수장선택</div>
+                                            <div class="aside-search-item-con">
+                                                <select id="" name="">
+                                                    <option value="">정수장선택</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="aside-search-item">
+                                            <div class="aside-search-item-tit">배수지선택</div>
+                                            <div class="aside-search-item-con">
+                                                <select id="" name="">
+                                                    <option value="">배수지선택</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- aside-btn-area : 검색 버튼 -->
+                                    <div class="aside-btn-area">
+                                        <button type="button" class="c-btn01 aside-btn" onclick="">
+                                            <span>저장</span>
+                                        </button>
+                                    </div>
+                                </aside>
+                                
+                                <div class="c-search-area">
+                                    <div class="c-content-area">
+                                        <section class="c-list-area">
+                                            <ul class="disdia-add-list">
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock01" name="" value="101(개항동)">
+                                                    <label for="watquaBlock01">101(개항동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock02" name="" value="102(개항동)">
+                                                    <label for="watquaBlock02">102(개항동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock03" name="" value="104(동인천동)">
+                                                    <label for="watquaBlock03">104(동인천동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock04" name="" value="105(신포동)">
+                                                    <label for="watquaBlock04">105(신포동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock05" name="" value="111(영종동)">
+                                                    <label for="watquaBlock05">111(영종동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock06" name="" value="113(용유동)">
+                                                    <label for="watquaBlock06">113(용유동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock07" name="" value="119(율목동)">
+                                                    <label for="watquaBlock07">119(율목동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock08" name="" value="120(신흥동)">
+                                                    <label for="watquaBlock08">120(신흥동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock09" name="" value="121(연안동)">
+                                                    <label for="watquaBlock09">121(연안동)</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" id="watquaBlock10" name="" value="122(도원동)">
+                                                    <label for="watquaBlock10">122(도원동)</label>
+                                                </li>
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
