@@ -887,6 +887,59 @@
     margin-left: 5px;
     flex-shrink: 0;
 }
+.c-table-write .c-table .message-receiver-add {
+	width: auto;
+	margin: -5px -5px 0;
+}
+.c-table-write .c-table .message-receiver-list {
+	width: auto;
+    height: 150px;
+	margin: 5px -5px -5px;
+    padding: 9px 10px;
+    background-color: #ffffff;
+    border: 1px solid #c6d8fc;
+    color: #475177;
+    font-size: 0;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+	border-radius: 4px;
+    resize: none;
+    overflow-y: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.c-table-write .c-table .message-receiver-list::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+.c-table-write .c-table .message-receiver-list>li {
+	width: auto;
+	height: auto;
+	display: -ms-flexbox;
+    display: inline-flex;
+	margin: 2px 10px 2px 0;
+	font-size: 16px;
+	line-height: 1.25em;
+    font-weight: 500;
+    font-family: 'NotoSansKR','dotum',sans-serif;
+}
+.c-table-write .c-table .message-receiver-list>li .message-receiver-txt {
+	padding-right: 2px;
+}
+.c-table-write .c-table .message-receiver-list>li .message-receiver-del {
+	width: auto;
+	height: auto;
+	padding: 1px 0 0;
+	background-color: transparent;
+	border: none;
+}
+.c-table-write .c-table .message-receiver-list>li .message-receiver-del:hover {
+	background-color: transparent;
+}
+.c-table-write .c-table .message-receiver-list>li .message-receiver-del img {
+	width: 20px;
+	height: auto;
+}
 .c-btn-area {
     text-align: right;
 }
@@ -1534,6 +1587,13 @@
         margin: -4px auto;
         padding: 10px;
     }
+    .c-table-write .c-table .message-receiver-add {
+		margin: -3px -5px 0;
+	}
+	.c-table-write .c-table .message-receiver-list>li {
+		font-size: 14px;
+		line-height: 1.429em;
+	}
     .c-table-area ~ .c-btn-area {
         margin-top: 10px;
     }
@@ -3560,12 +3620,13 @@
     -ms-flex-align: center;
     align-items: center;
     color: #475177;
+	line-height: 1.231em;
     font-weight: 700;
 }
 .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-top .map-setting-top-tit .map-setting-top-btn button {
     width: auto;
     height: auto;
-    vertical-align: middle;
+    vertical-align: top;
     padding: 0;
     background-color: transparent;
     border: none;
@@ -3700,10 +3761,12 @@
 .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
 }
-.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot canvas {
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot canvas,
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot img {
     margin: 0 auto;
 }
-.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot.not-over canvas {
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot.not-over canvas,
+.map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area .c-list-area #map-screenshot.not-over img {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -4235,123 +4298,161 @@
     }
 }
 
-@media screen and (max-height: 905px) and (min-width: 768px) {
+@media screen and (max-height: 661px) and (min-width: 1200px) {
     .c-map .c-content-area {
-        min-height: 805px;
+        min-height: 561px;
     }
     .c-map .map-vertical-icon-area.map-pc-icon {
-        height: 763px;
+        height: 519px;
     }
     .map-layer-wrap {
-        max-height: 723px;
+        max-height: 479px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-list-area {
-        max-height: 620px;
+        max-height: 376px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-area + .map-toptab-con .map-list-area {
-        max-height: 570px;
+        max-height: 326px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-con .map-ledger2-list-area .map-list-area {
-        max-height: 361px;
+        max-height: 117px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-layer-list-area {
-        height: 660px;
+        height: 416px;
         max-height: none;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
-        max-height: 503px;
+        max-height: 259px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
-        min-height: 681px;
+        min-height: 437px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
-        height: 681px;
+        height: 437px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
-        height: 681px;
+        height: 437px;
         min-height: auto;
     }
 }
 
-@media screen and (max-height: 741px) and (min-width: 576px) and (max-width: 767px) {
+@media screen and (max-height: 907px) and (min-width: 768px) and (max-width: 1199px) {
     .c-map .c-content-area {
-        min-height: 641px;
+        min-height: 807px;
     }
     .c-map .map-vertical-icon-area.map-pc-icon {
-        height: 599px;
+        height: 765px;
     }
     .map-layer-wrap {
-        max-height: 559px;
+        max-height: 725px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-list-area {
-        max-height: 456px;
+        max-height: 622px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-area + .map-toptab-con .map-list-area {
-        max-height: 406px;
+        max-height: 572px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-con .map-ledger2-list-area .map-list-area {
-        max-height: 197px;
+        max-height: 363px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-layer-list-area {
-        height: 496px;
+        height: 662px;
         max-height: none;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
-        max-height: 338px;
+        max-height: 505px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
-        min-height: 517px;
+        min-height: 683px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
-        height: 517px;
+        height: 683px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
-        height: 517px;
+        height: 683px;
         min-height: auto;
     }
 }
 
-@media screen and (max-height: 655px) and (max-width: 575px) {
+@media screen and (max-height: 743px) and (min-width: 576px) and (max-width: 767px) {
     .c-map .c-content-area {
-        min-height: 565px;
+        min-height: 643px;
     }
     .c-map .map-vertical-icon-area.map-pc-icon {
-        height: 527px;
+        height: 601px;
     }
     .map-layer-wrap {
-        max-height: 502px;
+        max-height: 561px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-list-area {
-        max-height: 413px;
+        max-height: 458px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-area + .map-toptab-con .map-list-area {
-        max-height: 369px;
+        max-height: 408px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-con .map-ledger2-list-area .map-list-area {
-        max-height: 170px;
+        max-height: 199px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-layer-list-area {
-        height: 438px;
+        height: 498px;
         max-height: none;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
-        max-height: 305px;
+        max-height: 340px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
-        min-height: 431px;
+        min-height: 519px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
-        height: 431px;
+        height: 519px;
     }
     .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
-        height: 431px;
+        height: 519px;
         min-height: auto;
     }
 }
 
-@media screen and (max-height: 655px) and (max-width: 475px) {
+@media screen and (max-height: 663px) and (max-width: 575px) {
+    .c-map .c-content-area {
+        min-height: 573px;
+    }
+    .c-map .map-vertical-icon-area.map-pc-icon {
+        height: 535px;
+    }
+    .map-layer-wrap {
+        max-height: 510px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .map-list-area {
+        max-height: 421px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-area + .map-toptab-con .map-list-area {
+        max-height: 377px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .map-toptab-con .map-ledger2-list-area .map-list-area {
+        max-height: 178px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .map-layer-list-area {
+        height: 446px;
+        max-height: none;
+    }
     .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
-        max-height: 99px;
+        max-height: 313px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-wrap {
+        min-height: 439px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area aside.aside {
+        height: 439px;
+    }
+    .map-layer-wrap .map-layer-box .map-layer-con-area .c-content-area {
+        height: 439px;
+        min-height: auto;
+    }
+}
+
+@media screen and (max-height: 663px) and (max-width: 475px) {
+    .map-layer-wrap .map-layer-box .map-layer-con-area .map-setting-area .map-setting .map-setting-item .map-setting-list {
+        max-height: 103px;
     }
 }
 
@@ -6071,6 +6172,18 @@
 }
 .layer-wrap .layer-box .layer-con-area .disdia-add-list>li input[type="checkbox"] + label {
     color: #313942;
+}
+.layer-wrap#message-receiver-add-layer .layer-box .layer-con-area .c-table-tit .table-tit-right {
+	width: 100%;
+}
+.layer-wrap#message-receiver-add-layer .layer-box .layer-con-area .c-table-tit .table-tit-right>.c-search-input {
+	width: 100%;
+	max-width: 100%;
+	margin-left: 0;
+}
+.layer-wrap#message-receiver-add-layer .layer-box .layer-con-area .c-table-area .c-table{
+	width: 100%;
+    white-space: normal;
 }
 .layer-wrap .layer-box .layer-btn-area .layer-btn {
     width: 100%;
