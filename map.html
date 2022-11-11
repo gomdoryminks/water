@@ -57,6 +57,7 @@
         <script src="js/tui-pagination.js" defer></script>
         <script src="js/tui-grid.js" defer></script>
         <script src="js/html2canvas.min.js" defer></script>
+        <script src="js/dom-to-image.min.js" defer></script>
         <script src="js/main.js" defer></script>
 	</head>
 
@@ -313,491 +314,535 @@
             <!-- content -->
             <!-- c-map : 관망도조회 내용 -->
             <section class="c-wrap c-map">
-                <!-- c-topbar-area : 페이지 상단바 -->
-                <ul class="c-topbar-area">
-                    <li>관망도조회</li>
-                </ul>
-                
-                <div class="c-content-area">
-                    <section class="c-map-area was-map-area"></section>
-                    
-                    <section class="map-horizontal-icon-area">
-                        <ul class="map-icon-list">
-                            <li>
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon01.png" alt="홈"></div>
-                                    <div class="map-icon-txt">홈</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon02.png" alt="도구"></div>
-                                    <div class="map-icon-txt">도구</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon03.png" alt="확대"></div>
-                                    <div class="map-icon-txt">확대</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon04.png" alt="축소"></div>
-                                    <div class="map-icon-txt">축소</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon05.png" alt="이전"></div>
-                                    <div class="map-icon-txt">이전</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon06.png" alt="다음"></div>
-                                    <div class="map-icon-txt">다음</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon07.png" alt="선택"></div>
-                                    <div class="map-icon-txt">선택</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon08.png" alt="선택해제"></div>
-                                    <div class="map-icon-txt">선택해제</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon09.png" alt="레이블"></div>
-                                    <div class="map-icon-txt">레이블</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon10.png" alt="초기화"></div>
-                                    <div class="map-icon-txt">초기화</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon11.png" alt="나침반"></div>
-                                    <div class="map-icon-txt">나침반</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon12.png" alt="전체화면"></div>
-                                    <div class="map-icon-txt">전체화면</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon13.png" alt="화면전환"></div>
-                                    <div class="map-icon-txt">화면전환</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    
-                    <section class="map-center-icon-area">
-                        <ul class="map-icon-list">
-                            <li>
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon14.png" alt="내위치"></div>
-                                    <div class="map-icon-txt">내위치</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    
-                    <section class="map-vertical-icon-area">
-                        <ul class="map-icon-list">
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'search');">
-                                    <div class="map-icon-img"><img src="img/map-icon15.png" alt="검색"></div>
-                                    <div class="map-icon-txt">검색</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'layer');">
-                                    <div class="map-icon-img"><img src="img/map-icon16.png" alt="레이어"></div>
-                                    <div class="map-icon-txt">레이어</div>
-                                </a>
-                            </li>
-                            <li class="map-pc-icon">
-                                <a href="javascript:void(0);" onclick="setMapScreenshot(this);">
-                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="인쇄하기"></div>
-                                    <div class="map-icon-txt">인쇄하기</div>
-                                </a>
-                            </li>
-                            <li class="map-pc-icon">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'fileSave');">
-                                    <div class="map-icon-img"><img src="img/map-icon29.png" alt="파일저장"></div>
-                                    <div class="map-icon-txt">파일저장</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'baseMap');">
-                                    <div class="map-icon-img"><img src="img/map-icon17.png" alt="베이스맵"></div>
-                                    <div class="map-icon-txt">베이스맵</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'distanceMeasurement');">
-                                    <div class="map-icon-img"><img src="img/map-icon18.png" alt="거리측정"></div>
-                                    <div class="map-icon-txt">거리측정</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'longitudinalSection');">
-                                    <div class="map-icon-img"><img src="img/map-icon19.png" alt="종단면도"></div>
-                                    <div class="map-icon-txt">종단면도</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterWay');">
-                                    <div class="map-icon-img"><img src="img/map-icon20.png" alt="물방향"></div>
-                                    <div class="map-icon-txt">물방향</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'crossSection');">
-                                    <div class="map-icon-img"><img src="img/map-icon21.png" alt="횡단면도"></div>
-                                    <div class="map-icon-txt">횡단면도</div>
-                                </a>
-                            </li>
-                            <li class="m-map-hidden">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon22.png" alt="로드뷰"></div>
-                                    <div class="map-icon-txt">로드뷰</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
-                                    <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
-                                    <div class="map-icon-txt">관세척</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
-                                    <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
-                                    <div class="map-icon-txt">밸브정보</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
-                                    <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
-                                    <div class="map-icon-txt">공사정보</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
-                                    <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
-                                    <div class="map-icon-txt">현장정보</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
-                                    <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
-                                    <div class="map-icon-txt">민원신고</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
-                                    <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
-                                    <div class="map-icon-txt">수용가</div>
-                                </a>
-                            </li>
-                            <li class="map-mobile-icon">
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
-                                    <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
-                                    <div class="map-icon-txt">RFID</div>
-                                </a>
-                            </li>
-                            <li class="map-pc-icon">
-                                <a href="javascript:void(0);" onclick="">
-                                    <div class="map-icon-img"><img src="img/map-icon32.png" alt="인덱스맵"></div>
-                                    <div class="map-icon-txt">인덱스맵</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    
-                    <section class="map-vertical-icon-area map-pc-icon">
-                        <ul class="map-icon-list">
-                            <li>
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
-                                    <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
-                                    <div class="map-icon-txt">관세척</div>
-                                </a>
-                            </li>
-                            <li>
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
-                                    <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
-                                    <div class="map-icon-txt">밸브정보</div>
-                                </a>
-                            </li>
-                            <li>
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
-                                    <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
-                                    <div class="map-icon-txt">공사정보</div>
-                                </a>
-                            </li>
-                            <li>
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
-                                    <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
-                                    <div class="map-icon-txt">현장정보</div>
-                                </a>
-                            </li>
-                            <li>
-                                <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
-                                <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
-                                    <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
-                                    <div class="map-icon-txt">민원신고</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
-                                    <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
-                                    <div class="map-icon-txt">수용가</div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
-                                    <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
-                                    <div class="map-icon-txt">RFID</div>
-                                </a>
-                            </li>
-                        </ul>
-                    </section>
-                    
-                    <section class="map-bottom-bar-area">
-                        <div class="map-bottom-bar-item">
-                            <div class="bottom-bar-area">
-                                <div class="bottom-bar-tit">작업대상 <br class="br-375">레이어</div>
-                                <!-- v-object-layer : 작업대상 레이어 -->
-                                <div class="bottom-bar-con"><span id="v-object-layer">유량계_전체</span></div>
-                            </div>
-                            <div class="bottom-bar-area">
-                                <div class="bottom-bar-tit">선택한 <br class="br-375">도구</div>
-                                <!-- v-selected-tool : 선택한 도구 -->
-                                <div class="bottom-bar-con"><span id="v-selected-tool">기본</span></div>
-                            </div>
-                            <div class="bottom-bar-area">
-                                <div class="bottom-bar-tit">축척</div>
-                                <div class="bottom-bar-con">
-                                    <select id="" name="">
-                                        <option value="1:2500">1:2,500</option>
-                                        <option value="1:5000">1:5,000</option>
-                                        <option value="1:7500">1:7,500</option>
-                                    </select>
+                <div id="wasMap">
+                    <!-- c-topbar-area : 페이지 상단바 -->
+                    <ul class="c-topbar-area">
+                        <li>관망도조회</li>
+                    </ul>
+
+                    <div class="c-content-area">
+                        <section class="c-map-area was-map-area"></section>
+
+                        <section class="map-horizontal-icon-area">
+                            <ul class="map-icon-list">
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon01.png" alt="홈"></div>
+                                        <div class="map-icon-txt">홈</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon02.png" alt="도구"></div>
+                                        <div class="map-icon-txt">도구</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon03.png" alt="확대"></div>
+                                        <div class="map-icon-txt">확대</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon04.png" alt="축소"></div>
+                                        <div class="map-icon-txt">축소</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/cursor-pointer.svg" alt="이동" class="svg"></div>
+                                        <div class="map-icon-txt">이동</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon05.png" alt="이전"></div>
+                                        <div class="map-icon-txt">이전</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon06.png" alt="다음"></div>
+                                        <div class="map-icon-txt">다음</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon12.png" alt="전체지도"></div>
+                                        <div class="map-icon-txt">전체지도</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon07.png" alt="선택"></div>
+                                        <div class="map-icon-txt">선택</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon08.png" alt="선택해제"></div>
+                                        <div class="map-icon-txt">선택해제</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon09.png" alt="레이블"></div>
+                                        <div class="map-icon-txt">레이블</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon10.png" alt="초기화"></div>
+                                        <div class="map-icon-txt">초기화</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon11.png" alt="나침반"></div>
+                                        <div class="map-icon-txt">나침반</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/drawing.svg" alt="그래픽" class="svg"></div>
+                                        <div class="map-icon-txt">그래픽</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon13.png" alt="화면전환"></div>
+                                        <div class="map-icon-txt">화면전환</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="map-center-icon-area">
+                            <ul class="map-icon-list">
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon14.png" alt="내위치"></div>
+                                        <div class="map-icon-txt">내위치</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="map-vertical-icon-area">
+                            <ul class="map-icon-list">
+                                <li>
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'search');">
+                                        <div class="map-icon-img"><img src="img/map-icon15.png" alt="검색"></div>
+                                        <div class="map-icon-txt">검색</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'layer');">
+                                        <div class="map-icon-img"><img src="img/map-icon16.png" alt="레이어"></div>
+                                        <div class="map-icon-txt">레이어</div>
+                                    </a>
+                                </li>
+                                <li class="map-pc-icon android-map-hidden">
+                                    <a href="javascript:void(0);" onclick="setMapScreenshot(this);">
+                                        <div class="map-icon-img"><img src="img/map-icon29.png" alt="인쇄하기"></div>
+                                        <div class="map-icon-txt">인쇄하기</div>
+                                    </a>
+                                </li>
+                                <li class="map-pc-icon android-map-hidden">
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'fileSave');">
+                                        <div class="map-icon-img"><img src="img/map-icon29.png" alt="파일저장"></div>
+                                        <div class="map-icon-txt">파일저장</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon17.png" alt="베이스맵"></div>
+                                        <div class="map-icon-txt">베이스맵</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon18.png" alt="측정"></div>
+                                        <div class="map-icon-txt">측정</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon19.png" alt="종단면도"></div>
+                                        <div class="map-icon-txt">종단면도</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'waterWay');">
+                                        <div class="map-icon-img"><img src="img/map-icon20.png" alt="물방향"></div>
+                                        <div class="map-icon-txt">물방향</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon21.png" alt="횡단면도"></div>
+                                        <div class="map-icon-txt">횡단면도</div>
+                                    </a>
+                                </li>
+                                <li class="m-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon22.png" alt="로드뷰"></div>
+                                        <div class="map-icon-txt">로드뷰</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
+                                        <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
+                                        <div class="map-icon-txt">관세척</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
+                                        <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
+                                        <div class="map-icon-txt">밸브정보</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
+                                        <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
+                                        <div class="map-icon-txt">공사정보</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
+                                        <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
+                                        <div class="map-icon-txt">현장정보</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
+                                        <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
+                                        <div class="map-icon-txt">민원신고</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
+                                        <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
+                                        <div class="map-icon-txt">수용가</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
+                                        <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
+                                        <div class="map-icon-txt">RFID</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/garage.svg" alt="업체관리" class="svg"></div>
+                                        <div class="map-icon-txt">업체관리</div>
+                                    </a>
+                                </li>
+                                <li class="map-mobile-icon">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/google-physical-web.svg" alt="A드레인" class="svg"></div>
+                                        <div class="map-icon-txt">A드레인</div>
+                                    </a>
+                                </li>
+                                <li class="map-pc-icon android-map-hidden">
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/map-icon32.png" alt="인덱스맵"></div>
+                                        <div class="map-icon-txt">인덱스맵</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="map-vertical-icon-area map-pc-icon">
+                            <ul class="map-icon-list">
+                                <li>
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail01');">
+                                        <div class="map-icon-img"><img src="img/map-icon23.png" alt="관세척"></div>
+                                        <div class="map-icon-txt">관세척</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail02');">
+                                        <div class="map-icon-img"><img src="img/map-icon24.png" alt="밸브정보"></div>
+                                        <div class="map-icon-txt">밸브정보</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail03');">
+                                        <div class="map-icon-img"><img src="img/map-icon25.png" alt="공사정보"></div>
+                                        <div class="map-icon-txt">공사정보</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail04');">
+                                        <div class="map-icon-img"><img src="img/map-icon26.png" alt="현장정보"></div>
+                                        <div class="map-icon-txt">현장정보</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <!-- data-detail-idx : 정보 인덱스번호 (값이 있으면 정보수정창, 없으면 정보추가창이 노출) -->
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail05');">
+                                        <div class="map-icon-img"><img src="img/map-icon27.png" alt="민원신고"></div>
+                                        <div class="map-icon-txt">민원신고</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'waterSupply');">
+                                        <div class="map-icon-img"><img src="img/map-icon30.png" alt="수용가"></div>
+                                        <div class="map-icon-txt">수용가</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="openMapLayer(this,'ledgerList19');">
+                                        <div class="map-icon-img"><img src="img/map-icon31.png" alt="RFID"></div>
+                                        <div class="map-icon-txt">RFID</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" data-detail-idx='' onclick="openMapLayer(this,'infoDetail00');">
+                                        <div class="map-icon-img"><img src="img/math-compass.svg" alt="공공측량" class="svg"></div>
+                                        <div class="map-icon-txt">공공측량</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/garage.svg" alt="업체관리" class="svg"></div>
+                                        <div class="map-icon-txt">업체관리</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);" onclick="">
+                                        <div class="map-icon-img"><img src="img/google-physical-web.svg" alt="A드레인" class="svg"></div>
+                                        <div class="map-icon-txt">A드레인</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </section>
+
+                        <section class="map-bottom-bar-area">
+                            <div class="map-bottom-bar-item">
+                                <div class="bottom-bar-area">
+                                    <div class="bottom-bar-tit">작업대상 <br class="br-375">레이어</div>
+                                    <!-- v-object-layer : 작업대상 레이어 -->
+                                    <div class="bottom-bar-con"><span id="v-object-layer">유량계_전체</span></div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="map-bottom-bar-item">
-                            <div class="bottom-bar-area">
-                                <div class="bottom-bar-tit">위치</div>
-                                <div class="bottom-bar-con">
-                                    <select id="" name="">
-                                        <option value="동이름">동이름</option>
-                                        <option value="블록명">블록명</option>
-                                    </select>
-                                    <select id="" name="">
-                                        <option value="">선택</option>
-                                    </select>
+                                <div class="bottom-bar-area">
+                                    <div class="bottom-bar-tit">선택한 <br class="br-375">도구</div>
+                                    <!-- v-selected-tool : 선택한 도구 -->
+                                    <div class="bottom-bar-con"><span id="v-selected-tool">기본</span></div>
                                 </div>
-                            </div>
-                            <div class="bottom-bar-area">
-                                <div class="bottom-bar-tit">좌표</div>
-                                <div class="bottom-bar-con">
-                                    <input type="text" id="" name="" value="126.000000">
-                                    <input type="text" id="" name="" value="37.000000">
-                                    <select id="" name="" class="m-map-hidden">
-                                        <option value="경위도">경위도</option>
-                                        <option value="TM">TM</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <section class="map-layer-area">
-                        <!-- map-layer00 : 아이콘창 -->
-                        <div class="map-layer-wrap map-layer00">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+                                <div class="bottom-bar-area">
+                                    <div class="bottom-bar-tit">축척</div>
+                                    <div class="bottom-bar-con">
+                                        <select id="" name="">
+                                            <option value="1:2500">1:2,500</option>
+                                            <option value="1:5000">1:5,000</option>
+                                            <option value="1:7500">1:7,500</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer01 : 대장리스트창 -->
-                        <div class="map-layer-wrap map-layer01">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+                            <div class="map-bottom-bar-item">
+                                <div class="bottom-bar-area">
+                                    <div class="bottom-bar-tit">위치</div>
+                                    <div class="bottom-bar-con">
+                                        <select id="" name="">
+                                            <option value="동이름">동이름</option>
+                                            <option value="블록명">블록명</option>
+                                        </select>
+                                        <select id="" name="">
+                                            <option value="">선택</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
-                            </div>
-                        </div>
-                        
-                        <!-- map-layer02 : 대장상세창 -->
-                        <div class="map-layer-wrap map-layer02">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+                                <div class="bottom-bar-area">
+                                    <div class="bottom-bar-tit">좌표</div>
+                                    <div class="bottom-bar-con">
+                                        <input type="text" id="" name="" value="126.000000">
+                                        <input type="text" id="" name="" value="37.000000">
+                                        <select id="" name="" class="m-map-hidden">
+                                            <option value="경위도">경위도</option>
+                                            <option value="TM">TM</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer03 : 정보리스트창 -->
-                        <div class="map-layer-wrap map-layer03">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+                        </section>
+
+                        <section class="map-layer-area">
+                            <!-- map-layer00 : 아이콘창 -->
+                            <div class="map-layer-wrap map-layer00">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer04 : 정보상세창 -->
-                        <div class="map-layer-wrap map-layer04">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+
+                            <!-- map-layer01 : 대장리스트창 -->
+                            <div class="map-layer-wrap map-layer01">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer05 : 레이어설정창 -->
-                        <div class="map-layer-wrap map-layer05">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit">레이어 설정</div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+
+                            <!-- map-layer02 : 대장상세창 -->
+                            <div class="map-layer-wrap map-layer02">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer06 : 단수분석창 -->
-                        <div class="map-layer-wrap map-layer06">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit">단수분석</div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+
+                            <!-- map-layer03 : 정보리스트창 -->
+                            <div class="map-layer-wrap map-layer03">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer07 : 수용가정보창 -->
-                        <div class="map-layer-wrap map-layer07">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit">수용가 정보</div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+
+                            <!-- map-layer04 : 정보상세창 -->
+                            <div class="map-layer-wrap map-layer04">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                        
-                        <!-- map-layer08 : 화면캡쳐창 -->
-                        <div class="map-layer-wrap map-layer08">
-                            <div class="map-layer-box">
-                                <div class="map-layer-tit-area">
-                                    <div class="map-layer-tit"></div>
-                                    <div class="map-layer-tit-btn">
-                                        <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
-                                            <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
-                                        </button>
-                                        <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
-                                            <span><img src="img/icon-close.png" alt="레이어닫기"></span>
-                                        </button>
+
+                            <!-- map-layer05 : 레이어설정창 -->
+                            <div class="map-layer-wrap map-layer05">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit">레이어 설정</div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
                                     </div>
+                                    <div class="map-layer-con-area"></div>
                                 </div>
-                                <div class="map-layer-con-area"></div>
                             </div>
-                        </div>
-                    </section>
+
+                            <!-- map-layer06 : 단수분석창 -->
+                            <div class="map-layer-wrap map-layer06">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit">단수분석</div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="map-layer-con-area"></div>
+                                </div>
+                            </div>
+
+                            <!-- map-layer07 : 수용가정보창 -->
+                            <div class="map-layer-wrap map-layer07">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit">수용가 정보</div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="map-layer-con-area"></div>
+                                </div>
+                            </div>
+
+                            <!-- map-layer08 : 화면캡쳐창 -->
+                            <div class="map-layer-wrap map-layer08">
+                                <div class="map-layer-box">
+                                    <div class="map-layer-tit-area">
+                                        <div class="map-layer-tit"></div>
+                                        <div class="map-layer-tit-btn">
+                                            <button type="button" class="map-show-btn" onclick="showMapLayer(this);">
+                                                <span><img src="img/icon-hide.png" alt="레이어내용보이기"></span>
+                                            </button>
+                                            <button type="button" class="map-close-btn" onclick="closeMapLayer(this);">
+                                                <span><img src="img/icon-close.png" alt="레이어닫기"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="map-layer-con-area"></div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
                 </div>
             </section>
             <!-- //content -->
