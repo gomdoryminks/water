@@ -69,6 +69,19 @@ $(function() {
     }
     //20220711 수정부분 end
     
+    //20221028 수정부분 start
+	//관망도조회 안드로이드나 ios일 경우 인쇄하기&파일저장&인덱스맵 아이콘 버튼 숨기기
+	if (agent.indexOf("android") > -1) {
+		//안드로이드
+		$(".c-map .map-icon-list>li.android-map-hidden").css("display","none");
+	} else if (agent.indexOf("iphone") > -1 || agent.indexOf("ipad") > -1 || agent.indexOf("ipod") > -1) {
+		//ios(아이폰, 아이패드, 아이팟)
+		$(".c-map .map-icon-list>li.android-map-hidden").css("display","none");
+	} else {
+		$(".c-map .map-icon-list>li.android-map-hidden").css("display","");
+	}
+	//20221028 수정부분 end
+    
     //리사이즈
     $(window).resize(function() {
         oldWinWidth = winWidth;
@@ -141,10 +154,11 @@ $(function() {
         //20220803 수정부분 end
         
         //20220926 수정부분 start
+        //20221101 수정부분 start
         //관망도조회 인쇄하기창 리사이즈시 이미지에 클래스 설정
-        if ($("#map-screenshot canvas").length > 0) {
+        if ($("#map-screenshot img").length > 0) {
             var screenshotAreaHeight = $("#map-screenshot").height();
-            var screenshotCanvasHeight = $("#map-screenshot").find("canvas").height();
+            var screenshotCanvasHeight = $("#map-screenshot").find("img").height();
             
             if (screenshotAreaHeight > screenshotCanvasHeight) {
                 $("#map-screenshot").addClass("not-over");
@@ -152,6 +166,7 @@ $(function() {
                 $("#map-screenshot").removeClass("not-over");
             }
         }
+        //20221101 수정부분 end
         //20220926 수정부분 end
     });
     
@@ -762,6 +777,13 @@ function selSelectOption(obj) {
     $(selectObj).find(".c-select-list").removeClass("on");
 }
 //20220715 수정부분 end
+
+//20221028 수정부분 start
+//문자전송 수신자삭제
+function delMessageReceiver(obj) {
+    $(obj).closest("li").remove();
+}
+//20221028 수정부분 end
 
 //검색방법 선택결과 초기화
 function setSearchType(obj) {
@@ -2786,7 +2808,11 @@ function openCanvasPrint(canvasUrl) {
     
     printWindow.document.write('<html><head><title></title>');
     printWindow.document.write('</head><body>');
-    printWindow.document.write('<img src="' + canvasUrl + '">');
+    
+    //20221101 수정부분 start
+    printWindow.document.write('<img src="' + canvasUrl + '" style="max-width: 100%;">');
+    //20221101 수정부분 end
+    
     printWindow.document.write('</body></html>');
     printWindow.document.close();
     printWindow.focus(); 
@@ -3051,6 +3077,34 @@ function openLoginLogLayer(obj) {
         event.preventDefault();
     });
 }
+
+//20221028 수정부분 start
+//문자전송 수신자추가창 열기
+function openMessageReceiverAddLayer(obj) {
+    $("#message-receiver-add-layer").addClass("on");
+    
+	//전체 체크&체크해제
+    $("input[type='checkbox'][id$='All']").click(function() {
+        var idName = $(this).attr("id").slice(0,-3);
+        
+        if (idName != "" && idName != undefined) {
+            if ($(this).is(":checked")) {
+                $("input[type='checkbox'][id^='" + idName + "']").prop("checked",true);
+            } else {
+                $("input[type='checkbox'][id^='" + idName + "']").prop("checked",false);
+            }
+        }
+    });
+	
+    var scrollTop = parseInt($(document).scrollTop());
+
+    $("body").css("top", -scrollTop + "px");
+
+    $("body").addClass("scroll-disable").on('scroll touchmove', function(event) {
+        event.preventDefault();
+    });
+}
+//20221028 수정부분 end
 
 //20220714 수정부분 start
 //관망도관리 레이어 등록정보창 열기
@@ -3786,10 +3840,11 @@ function setMapBuildingClear(obj) {
     $(mapLayerObj).find(".map-search-building-form").find("input[type='text']").val("");
 }
 
+//20221101 수정부분 start
 //관망도조회 화면캡쳐 영역 설정
 function setMapScreenshot(obj) {
     //캡쳐 기능 활성화
-    var height = window.innerHeight;
+    /*var height = window.innerHeight;
     var width = $(document).width();
     var $mask = $('<div id="screenshot_mask"></div>').css("border-width", "0 0 " + height + "px 0");
     var $focus = $('<div id="screenshot_focus"></div>');
@@ -3899,8 +3954,47 @@ function setMapScreenshot(obj) {
             el.download = "파일명.jpg";
             el.click();
         }
-    }
+    }*/
+    
+    $(".preloader").addClass("on");
+    
+    //지도 영역 태그와 그 밑에 있는 자식태그 모두 제외한 나머지 태그들에 스크롤 없애기 (캡쳐시 css로 숨긴 스크롤이 보이는 현상때문에 설정)
+    $("#wasMap *").not(".was-map-area,.was-map-area *").css("overflow","hidden");
+    
+    domtoimage.toBlob(document.getElementById("wasMap")).then(function(blob) {
+        var reader = new FileReader();
+        
+        reader.onload = function(e) {
+            openMapLayer(obj, "screenshot");
+            $("#map-screenshot").append("<img src='" + reader.result + "' alt='인쇄하기이미지'>");
+            
+            //지도 영역 태그와 그 밑에 있는 자식태그 모두 제외한 나머지 태그들에 스크롤 초기화하기
+            $("#wasMap *").not(".was-map-area,.was-map-area *").css("overflow","");
+
+            if ($("#map-screenshot img").length > 0) {
+                var screenshotAreaHeight = $("#map-screenshot").height();
+                var screenshotCanvasHeight = $("#map-screenshot").find("img").height();
+
+                if (screenshotAreaHeight > screenshotCanvasHeight) {
+                    $("#map-screenshot").addClass("not-over");
+                } else {
+                    $("#map-screenshot").removeClass("not-over");
+                }
+            }
+            
+            $(".preloader").removeClass("on");
+            
+            var mapLayerObj = $("#map-screenshot").closest(".map-layer-wrap");
+
+            $(mapLayerObj).find(".print-btn").click(function() {
+                openCanvasPrint(reader.result);
+            });
+        }
+        
+        reader.readAsDataURL(blob);
+  });
 }
+//20221101 수정부분 end
 //20220926 수정부분 end
 
 //관망도조회 상단 탭 클릭시
