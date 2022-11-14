@@ -82,6 +82,19 @@ $(function() {
 	}
 	//20221028 수정부분 end
     
+    //20221111 수정부분 start
+    //안드로이드나 ios일 경우 풋터 숨기기
+	if (agent.indexOf("android") > -1) {
+		//안드로이드
+		$(".m-wrap").addClass("android-wrap");
+	} else if (agent.indexOf("iphone") > -1 || agent.indexOf("ipad") > -1 || agent.indexOf("ipod") > -1) {
+		//ios(아이폰, 아이패드, 아이팟)
+		$(".m-wrap").addClass("android-wrap");
+	} else {
+		$(".m-wrap").removeClass("android-wrap");
+	}
+    //20221111 수정부분 end
+    
     //리사이즈
     $(window).resize(function() {
         oldWinWidth = winWidth;
@@ -1598,7 +1611,18 @@ function setNigminGrid() {
     gridSummary.position = 'bottom';
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 353) : (winHeight - 383);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 353;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 383;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 383;
+    } else {
+        gridBodyHeight = winHeight - 425;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -1660,7 +1684,18 @@ function setNigminGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 353) : (winHeight - 383);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 353;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 383;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 383;
+        } else {
+            gridReBodyHeight = winHeight - 425;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -1704,7 +1739,18 @@ function setWatfloGrid() {
     gridSummary2.position = 'bottom';
 
     //그리드 body 높이 설정
-    gridBodyHeight2 = (winWidth < 576) ? (winHeight - 568) : (winHeight - 601);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight2 = winHeight - 568;
+    } else if (winWidth < 1200) {
+        gridBodyHeight2 = winHeight - 601;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight2 = winHeight - 601;
+    } else {
+        gridBodyHeight2 = winHeight - 643;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight2 = (gridBodyHeight2 < 137) ? 137 : gridBodyHeight2;
 
@@ -1803,7 +1849,18 @@ function setWatfloGrid() {
         var gridReBodyHeight2 = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight2 = (winWidth < 576) ? (winHeight - 568) : (winHeight - 601);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight2 = winHeight - 568;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight2 = winHeight - 601;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight2 = winHeight - 601;
+        } else {
+            gridReBodyHeight2 = winHeight - 643;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight2 = (gridReBodyHeight2 < 137) ? 137 : gridReBodyHeight2;
         
@@ -1927,7 +1984,18 @@ function setAmoleaGrid() {
     gridSummary.position = 'bottom';
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 328) : (winHeight - 356);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 328;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 356;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 356;
+    } else {
+        gridBodyHeight = winHeight - 398;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -1992,7 +2060,18 @@ function setAmoleaGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 328) : (winHeight - 356);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 328;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 356;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 356;
+        } else {
+            gridReBodyHeight = winHeight - 398;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2121,13 +2200,19 @@ function setMeainsPointGrid() {
     gridHeader.height = 62;
     
     //그리드 body 높이 설정
+    //20221111 수정부분 start
     if (winWidth < 576) {
         gridBodyHeight = winHeight - 220;
     } else if (winWidth < 766) {
         gridBodyHeight = winHeight - 244;
-    } else {
+    } else if (winWidth < 1200) {
         gridBodyHeight = (winHeight / 2) - 194;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = (winHeight / 2) - 194;
+    } else {
+        gridBodyHeight = (winHeight / 2) - 215;
     }
+    //20221111 수정부분 end
     
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 137) ? 137 : gridBodyHeight;
@@ -2181,13 +2266,19 @@ function setMeainsPointGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
+        //20221111 수정부분 start
         if (winWidth < 576) {
             gridReBodyHeight = winHeight - 220;
         } else if (winWidth < 766) {
-            gridReBodyHeight = winHeight - 244;
-        } else {
+            gridReBodyHeight = winHeight - 244;  
+        } else if (winWidth < 1200) {
             gridReBodyHeight = (winHeight / 2) - 194;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = (winHeight / 2) - 194;
+        } else {
+            gridReBodyHeight = (winHeight / 2) - 215;
         }
+        //20221111 수정부분 end
 
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 137) ? 137 : gridReBodyHeight;
@@ -2252,13 +2343,19 @@ function setMeainsMachineGrid() {
     gridHeader.height = 62;
     
     //그리드 body 높이 설정
+    //20221111 수정부분 start
     if (winWidth < 576) {
         gridBodyHeight = winHeight - 220;
     } else if (winWidth < 766) {
-        gridBodyHeight = winHeight - 244;
-    } else {
+        gridBodyHeight = winHeight - 244;   
+    } else if (winWidth < 1200) {
         gridBodyHeight = (winHeight / 2) - 194;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = (winHeight / 2) - 194;
+    } else {
+        gridBodyHeight = (winHeight / 2) - 215;
     }
+    //20221111 수정부분 end
     
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 137) ? 137 : gridBodyHeight;
@@ -2310,13 +2407,19 @@ function setMeainsMachineGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
+        //20221111 수정부분 start
         if (winWidth < 576) {
             gridReBodyHeight = winHeight - 220;
         } else if (winWidth < 766) {
             gridReBodyHeight = winHeight - 244;
-        } else {
+        } else if (winWidth < 1200) {
             gridReBodyHeight = (winHeight / 2) - 194;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = (winHeight / 2) - 194;
+        } else {
+            gridReBodyHeight = (winHeight / 2) - 215;
         }
+        //20221111 수정부분 end
 
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 137) ? 137 : gridReBodyHeight;
@@ -2361,7 +2464,18 @@ function setEdidatUserGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2397,7 +2511,18 @@ function setEdidatUserGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2419,7 +2544,18 @@ function setEdidatFacilityGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2455,7 +2591,18 @@ function setEdidatFacilityGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2477,7 +2624,18 @@ function setBueddaUserGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2515,7 +2673,18 @@ function setBueddaUserGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2537,7 +2706,18 @@ function setBueddaFacilityGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2574,7 +2754,18 @@ function setBueddaFacilityGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2596,7 +2787,18 @@ function setDatbacGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2631,7 +2833,18 @@ function setDatbacGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
@@ -2653,7 +2866,18 @@ function setMapdatGrid() {
     var smColumnContent = {};
 
     //그리드 body 높이 설정
-    gridBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+    //20221111 수정부분 start
+    if (winWidth < 576) {
+        gridBodyHeight = winHeight - 223;
+    } else if (winWidth < 1200) {
+        gridBodyHeight = winHeight - 250;
+    } else if ($(".m-wrap").hasClass("android-wrap")) {
+        gridBodyHeight = winHeight - 250;
+    } else {
+        gridBodyHeight = winHeight - 292;
+    }
+    //20221111 수정부분 end
+    
     //그리드 body 최소높이 설정
     gridBodyHeight = (gridBodyHeight < 217) ? 217 : gridBodyHeight;
 
@@ -2691,7 +2915,18 @@ function setMapdatGrid() {
         var gridReBodyHeight = 'auto';
         
         //그리드 body 높이 설정
-        gridReBodyHeight = (winWidth < 576) ? (winHeight - 223) : (winHeight - 250);
+        //20221111 수정부분 start
+        if (winWidth < 576) {
+            gridReBodyHeight = winHeight - 223;
+        } else if (winWidth < 1200) {
+            gridReBodyHeight = winHeight - 250;
+        } else if ($(".m-wrap").hasClass("android-wrap")) {
+            gridReBodyHeight = winHeight - 250;
+        } else {
+            gridReBodyHeight = winHeight - 292;
+        }
+        //20221111 수정부분 end
+        
         //그리드 body 최소높이 설정
         gridReBodyHeight = (gridReBodyHeight < 217) ? 217 : gridReBodyHeight;
         
