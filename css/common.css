@@ -1084,11 +1084,22 @@ aside.aside .aside-btn-area .aside-btn:first-child {
 footer.footer {
     width: 100%;
     height: 42px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
     background-color: #15204a;
     border-top: 1px solid #d7d7d7;
 }
 .android-wrap footer.footer {
     display: none;
+}
+footer.footer .footer-tit {
+    flex-shrink: 0;
+    padding-left: 20px;
+    color: #ffffff;
+    font-size: 0.938em;
+    word-break:keep-all;
 }
 footer.footer .footer-menu-list {
     width: 100%;
@@ -1104,11 +1115,17 @@ footer.footer .footer-menu-list {
     padding: 0 20px;
 }
 footer.footer .footer-menu-list>li {
-    padding: 0 10px;
+    margin: 0 10px;
     color: #ffffff;
-    font-size: 0.875em;
+    font-size: 0.813em;
     text-align: center;
     word-break:keep-all; 
+}
+footer.footer .footer-menu-list>li:hover {
+    color: #ced2ea;
+}
+footer.footer .footer-menu-list>li a {
+    display: block;
 }
 
 @media screen and (max-width: 1199px) {

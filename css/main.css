@@ -6018,12 +6018,60 @@
 .layer-wrap .layer-box .layer-con-area .sub-menu-list>li a:hover {
     background-color: #e6eefe;
 }
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit {
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    font-size: 1em;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-date {
+    display: -ms-flexbox;
+    display: flex;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-date>li {
+    margin-right: 15px;
+    font-size: 0.875em;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-item {
+    display: -ms-flexbox;
+    display: flex;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-item>* {
+    width: auto;
+    max-width: 100%;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-item .trand-search-input {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .c-table-tit .trand-search-item .trand-search-input .c-date-input {
+    max-width: 229px;
+    margin-right: 5px;
+}
 .layer-wrap .layer-box .layer-con-area .trand-area .c-table-area {
     margin-bottom: 15px;
 }
 .layer-wrap .layer-box .layer-con-area .trand-area .c-table-area tr th,
 .layer-wrap .layer-box .layer-con-area .trand-area .c-table-area tr td {
     padding: 10px;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .trand-explain {
+    margin: 15px 0 0 13px;
+    color: #ff4438;
+    line-height: 1.5em;
+    text-indent: -13px;
+}
+.layer-wrap .layer-box .layer-con-area .trand-area .trand-explain:before {
+    content: '*';
+    width: auto;
+    height: auto;
+    display: inline;
+    vertical-align: middle;
+    padding-right: 5px;
+    line-height: 1em;
 }
 .layer-wrap .layer-box .layer-con-area .abnmon-event-area .abnmon-event-label-area .abnmon-event-label-list {
     display: -ms-flexbox;
@@ -6411,6 +6459,11 @@
     .layer-wrap .layer-box .layer-con-area .trand-area .c-table-area tr th,
     .layer-wrap .layer-box .layer-con-area .trand-area .c-table-area tr td {
         padding: 8px;
+    }
+    .layer-wrap .layer-box .layer-con-area .trand-area .trand-explain {
+        margin: 10px 0 0 12px;
+        line-height: 1.429em;
+        text-indent: -12px;
     }
     .layer-wrap .layer-box .layer-con-area .abnmon-event-area .abnmon-event-label-area .abnmon-event-label-list {
         margin-top: 10px;
