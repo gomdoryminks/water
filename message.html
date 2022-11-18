@@ -407,7 +407,9 @@
             
             <!-- footer -->
             <footer class="footer">
-                <h1 class="not-view">header</h1>
+                <h1 class="not-view">footer</h1>
+                
+                <div class="footer-tit">자주 찾는 사이트</div>
                 
                 <ul class="footer-menu-list">
                     <li>
@@ -574,6 +576,28 @@
                         </div>
                         <div class="layer-con-area">
                             <div class="trand-area">
+                                <div class="c-table-tit">
+                                    <ul class="trand-search-date">
+                                        <li>
+                                            <input type="radio" id="trandDate00" name="trandDate" onclick="setSearchDate('startTrandDate','endTrandDate','-1d');">
+                                            <label for="trandDate00">1일</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="trandDate01" name="trandDate" onclick="setSearchDate('startTrandDate','endTrandDate','-1m');">
+                                            <label for="trandDate01">1개월</label>
+                                        </li>
+                                    </ul>
+                                    <div class="trand-search-item">
+                                        <div class="trand-search-input">
+                                            <input type="text" id="startTrandDate" name="" class="c-date-input" readonly placeholder="시작일선택" autocomplete="off">
+                                            <input type="text" id="endTrandDate" name="" class="c-date-input" readonly placeholder="종료일선택" autocomplete="off">
+                                        </div>
+                                        <button type="button" class="c-btn01" onclick="">
+                                            <span>조회</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                
                                 <!-- v-trand-data : 실시간 트렌드분석 데이터 -->
                                 <div class="c-table-area" id="v-trand-data">
                                     <table class="c-table">
@@ -601,6 +625,10 @@
                                 
                                 <!-- trand-chart-area : 트렌드분석 차트 그리기 -->
                                 <div class="trand-chart-area"></div>
+                                
+                                <div class="trand-explain">여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다.</div>
+                                <div class="trand-explain">여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다.</div>
+                                <div class="trand-explain">여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다. 여기에는 트렌드 분석화면과 관련해서 문구를 추가해주시면 됩니다.</div>
                             </div>
                         </div>
                     </div>
